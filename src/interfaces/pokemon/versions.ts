@@ -64,87 +64,87 @@ export interface IVersions {
 	'generation-iv': {
 		'diamond-pearl': {
 			back_default: string;
-			back_female: any;
+			back_female: string;
 			back_shiny: string;
-			back_shiny_female: any;
+			back_shiny_female: string;
 			front_default: string;
-			front_female: any;
+			front_female: string;
 			front_shiny: string;
-			front_shiny_female: any;
+			front_shiny_female: string;
 		},
 		'heartgold-soulsilver': {
 			back_default: string;
-			back_female: any;
+			back_female: string;
 			back_shiny: string;
-			back_shiny_female: any;
+			back_shiny_female: string;
 			front_default: string;
-			front_female: any;
+			front_female: string;
 			front_shiny: string;
-			front_shiny_female: any;
+			front_shiny_female: string;
 		},
 		platinum: {
 			back_default: string;
-			back_female: any;
+			back_female: string;
 			back_shiny: string;
-			back_shiny_female: any;
+			back_shiny_female: string;
 			front_default: string;
-			front_female: any;
+			front_female: string;
 			front_shiny: string;
-			front_shiny_female: any;
+			front_shiny_female: string;
 		}
 	},
 	'generation-v': {
 		'black-white': {
 			animated: {
 				back_default: string;
-				back_female: any;
+				back_female: string;
 				back_shiny: string;
-				back_shiny_female: any;
+				back_shiny_female: string;
 				front_default: string;
-				front_female: any;
+				front_female: string;
 				front_shiny: string;
-				front_shiny_female: any;
+				front_shiny_female: string;
 			},
 			back_default: string;
-			back_female: any;
+			back_female: string;
 			back_shiny: string;
-			back_shiny_female: any;
+			back_shiny_female: string;
 			front_default: string;
-			front_female: any;
+			front_female: string;
 			front_shiny: string;
-			front_shiny_female: any;
+			front_shiny_female: string;
 		}
 	},
 	'generation-vi': {
 		'omegaruby-alphasapphire': {
 			front_default: string;
-			front_female: any;
+			front_female: string;
 			front_shiny: string;
-			front_shiny_female: any;
+			front_shiny_female: string;
 		},
 		'x-y': {
 			front_default: string;
-			front_female: any;
+			front_female: string;
 			front_shiny: string;
-			front_shiny_female: any;
+			front_shiny_female: string;
 		}
 	},
 	'generation-vii': {
 		icons: {
 			front_default: string;
-			front_female: any;
+			front_female: string;
 		},
 		'ultra-sun-ultra-moon': {
 			front_default: string;
-			front_female: any;
+			front_female: string;
 			front_shiny: string;
-			front_shiny_female: any;
+			front_shiny_female: string;
 		}
 	},
 	'generation-viii': {
 		icons: {
 			front_default: string;
-			front_female: any;
+			front_female: string;
 		}
 	}
 }

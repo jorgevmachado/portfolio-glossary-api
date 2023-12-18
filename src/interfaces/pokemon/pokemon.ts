@@ -32,7 +32,7 @@ export interface IResponsePokemon {
 		other: {
 			dream_world: {
 				front_default: string;
-				front_female: any;
+				front_female: string;
 			},
 			home: {
 				front_default: string;
@@ -179,7 +179,7 @@ export interface IResponsePokemon {
 			'generation-vii': {
 				icons: {
 					front_default: string;
-					front_female: any;
+					front_female: string;
 				},
 				'ultra-sun-ultra-moon': {
 					front_default: string;
@@ -191,7 +191,7 @@ export interface IResponsePokemon {
 			'generation-viii': {
 				icons: {
 					front_default: string;
-					front_female: any;
+					front_female: string;
 				}
 			}
 		}

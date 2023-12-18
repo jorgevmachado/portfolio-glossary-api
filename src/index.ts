@@ -16,7 +16,7 @@ app.use(routes);
 
 
 app.listen(PORT, () => {
-	console.log('---------------------------------');
-	console.log(`🚀 API is running - PORT:${PORT} 🚀`);
-	console.log('---------------------------------');
+    console.log('---------------------------------');
+    console.log(`🚀 API is running - PORT:${PORT} 🚀`);
+    console.log('---------------------------------');
 });

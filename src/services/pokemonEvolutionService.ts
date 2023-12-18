@@ -34,7 +34,7 @@ export class PokemonEvolutionService {
         return evolutions;
     }
 
-    private getNextEvolutions(evolvesTo: IResponseEvolutions['chain']['evolves_to']): any {
+    private getNextEvolutions(evolvesTo: IResponseEvolutions['chain']['evolves_to']): Array<string> {
         return evolvesTo
             .map((item) => [item.species.name]
                 .concat(...this.getNextEvolutions(item.evolves_to)))

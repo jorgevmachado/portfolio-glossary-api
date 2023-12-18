@@ -1,53 +1,53 @@
 import { type IPokemonBase } from './pokemon';
 
 export interface IResponseEvolutions {
-	baby_trigger_item: any;
+	baby_trigger_item: string;
 	chain: {
-		evolution_details: Array<any>;
+		evolution_details: Array<string>;
 		evolves_to: Array<{
 				evolution_details: Array<{
-						gender: any;
-						held_item: any;
-						item: any;
-						known_move: any;
-						known_move_type: any;
-						location: any;
-						min_affection: any;
-						min_beauty: any;
-						min_happiness: any;
+						gender: string;
+						held_item: string;
+						item: string;
+						known_move: string;
+						known_move_type: string;
+						location: string;
+						min_affection: string;
+						min_beauty: string;
+						min_happiness: string;
 						min_level: number;
 						needs_overworld_rain: boolean;
-						party_species: any;
-						party_type: any;
-						relative_physical_stats: any;
+						party_species: string;
+						party_type: string;
+						relative_physical_stats: string;
 						time_of_day: string;
-						trade_species: any;
+						trade_species: string;
 						trigger: IPokemonBase;
 						turn_upside_down: boolean;
 					}>
 				evolves_to: Array<{
 						evolution_details: Array<
 							{
-								gender: any;
-								held_item: any;
-								item: any;
-								known_move: any;
-								known_move_type: any;
-								location: any;
-								min_affection: any;
-								min_beauty: any;
-								min_happiness: any;
+								gender: string;
+								held_item: string;
+								item: string;
+								known_move: string;
+								known_move_type: string;
+								location: string;
+								min_affection: string;
+								min_beauty: string;
+								min_happiness: string;
 								min_level: number;
 								needs_overworld_rain: boolean;
-								party_species: any;
-								party_type: any;
-								relative_physical_stats: any;
+								party_species: string;
+								party_type: string;
+								relative_physical_stats: string;
 								time_of_day: string;
-								trade_species: any;
+								trade_species: string;
 								trigger: IPokemonBase;
 								turn_upside_down: boolean;
 							}>;
-						evolves_to: Array<any>;
+						evolves_to: Array<string>;
 						is_baby: boolean;
 						species: IPokemonBase;
 					}>;
