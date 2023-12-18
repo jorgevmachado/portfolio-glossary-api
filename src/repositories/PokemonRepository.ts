@@ -1,15 +1,7 @@
-import { IPokemon, IPokemonBase } from '../interfaces/pokemon/pokemon';
+import { IPokemon } from '../interfaces/pokemon/pokemon';
 import { AppDataSource } from '../data-source';
 import { Pokemon } from '../entity/Pokemon';
 import { IPaginate } from '../interfaces/paginate';
-
-interface IPageProps {
-	data: Array<Pokemon>;
-	pages: number;
-	total: number;
-	perPage: number;
-	currentPage: number;
-}
 
 interface ICurrentProps {
 	page: number;
