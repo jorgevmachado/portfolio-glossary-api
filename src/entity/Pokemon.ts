@@ -1,12 +1,14 @@
 import {
-	Column,
-	CreateDateColumn,
-	DeleteDateColumn,
-	Entity,
-	JoinColumn, JoinTable, ManyToMany, OneToMany,
-	OneToOne,
-	PrimaryGeneratedColumn,
-	UpdateDateColumn
+    Column,
+    CreateDateColumn,
+    DeleteDateColumn,
+    Entity,
+    JoinColumn,
+    JoinTable,
+    ManyToMany,
+    OneToOne,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn
 } from 'typeorm';
 import { PokemonSpecies } from './PokemonSpecies';
 import { PokemonStats } from './PokemonStats';
@@ -17,82 +19,82 @@ import { PokemonMove } from './PokemonMove';
 @Entity('pokemons')
 export class Pokemon {
 	@PrimaryGeneratedColumn('uuid')
-	id: string;
+	    id: string;
 
 	@Column()
-	order: number;
+	    order: number;
 
 	@Column()
-	url: string;
+	    url: string;
 
 	@Column()
-	name: string;
+	    name: string;
 
 	@Column({
-		nullable: true
+	    nullable: true
 	})
-	image?: string;
+	    image?: string;
 
 	@Column({
-		nullable: true
+	    nullable: true
 	})
-	weight?: number;
+	    weight?: number;
 
 	@Column({
-		nullable: true
+	    nullable: true
 	})
-	height?: number;
+	    height?: number;
 
 	@Column({
-		nullable: true
+	    nullable: true
 	})
-	base_experience?: number;
+	    base_experience?: number;
 
 	@CreateDateColumn()
-	created_at: Date;
+	    created_at: Date;
 
 	@UpdateDateColumn()
-	updated_at?: Date;
+	    updated_at?: Date;
 
 	@DeleteDateColumn()
-	deleted_at?: Date;
+	    deleted_at?: Date;
 
 	@OneToOne( () => PokemonSpecies)
 	@JoinColumn()
-	specie: PokemonSpecies;
+	    specie: PokemonSpecies;
 
 	@ManyToMany(
-		() => PokemonStats,
-		{ nullable: true }
+	    () => PokemonStats,
+	    { nullable: true }
 	)
 	@JoinTable()
-	stats: Array<PokemonStats>;
+	    stats: Array<PokemonStats>;
 
 	@ManyToMany(
-		() => PokemonTypes,
-		{ nullable: true }
+	    () => PokemonTypes,
+	    { nullable: true }
 	)
 	@JoinTable()
-	types: Array<PokemonTypes>;
+	    types: Array<PokemonTypes>;
 
 	@ManyToMany(
-		() => PokemonAbility,
-		{ nullable: true }
+	    () => PokemonAbility,
+	    { nullable: true }
 	)
 	@JoinTable()
-	abilities: Array<PokemonAbility>;
+	    abilities: Array<PokemonAbility>;
 
 	@ManyToMany(
-		() => Pokemon,
-		{ nullable: true }
+	    () => Pokemon,
+	    { nullable: true }
 	)
 	@JoinTable()
-	evolutions: Array<Pokemon>;
+	    evolutions: Array<Pokemon>;
 
 	@ManyToMany(
-		() => PokemonMove,
-		{ nullable: true }
+	    () => PokemonMove,
+	    { nullable: true }
 	)
 	@JoinTable()
-	moves: Array<PokemonMove>;
+	    moves: Array<PokemonMove>;
 }

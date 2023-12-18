@@ -4,50 +4,50 @@ import { type IMove } from '../interfaces/pokemon/move';
 @Entity('pokemons_moves')
 export class PokemonMove implements IMove {
 	@PrimaryGeneratedColumn('uuid')
-	id: string;
+	    id: string;
 
 	@Column({
-		nullable: true
+	    nullable: true
 	})
-	pp?: number;
+	    pp?: number;
 
 	@Column()
-	url: string;
+	    url: string;
 
 	@Column()
-	name: string;
+	    name: string;
 
 	@Column({
-		nullable: true
+	    nullable: true
 	})
-	type?: string;
+	    type?: string;
 
 	@Column({
-		nullable: true
+	    nullable: true
 	})
-	power?: number;
+	    power?: number;
 
 	@Column({
-		nullable: true
+	    nullable: true
 	})
-	target?: string;
+	    target?: string;
 
 	@Column({
-		nullable: true
+	    nullable: true
 	})
-	priority?: number;
+	    priority?: number;
 
 	@Column({
-		nullable: true
+	    nullable: true
 	})
-	accuracy?: number;
+	    accuracy?: number;
 
 	@CreateDateColumn()
-	created_at: Date;
+	    created_at: Date;
 
 	@UpdateDateColumn()
-	updated_at?: Date;
+	    updated_at?: Date;
 
 	@DeleteDateColumn()
-	deleted_at?: Date;
+	    deleted_at?: Date;
 }

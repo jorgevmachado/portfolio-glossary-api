@@ -5,26 +5,26 @@ import { type IAbility } from '../interfaces/pokemon/ability';
 export class PokemonAbility implements IAbility {
 
 	@PrimaryGeneratedColumn('uuid')
-	id: string;
+	    id: string;
 
 	@Column()
-	is_hidden: boolean;
+	    is_hidden: boolean;
 
 	@Column()
-	name: string;
+	    name: string;
 
 	@Column()
-	slot: number;
+	    slot: number;
 
 	@Column()
-	url: string;
+	    url: string;
 
 	@CreateDateColumn()
-	created_at: Date;
+	    created_at: Date;
 
 	@UpdateDateColumn()
-	updated_at?: Date;
+	    updated_at?: Date;
 
 	@DeleteDateColumn()
-	deleted_at?: Date;
+	    deleted_at?: Date;
 }

@@ -21,3 +21,6 @@ run-migration:
 
 revert-migration:
 	$(RUN) typeorm migration:revert -- -d ./src/data-source.ts
+
+lint:
+	$(RUN) lint

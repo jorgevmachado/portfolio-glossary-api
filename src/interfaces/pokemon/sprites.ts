@@ -1,5 +1,5 @@
-import { IOrder } from './order';
-import { IVersions } from './versions';
+import { type IOrder } from './order';
+import { type IVersions } from './versions';
 
 export interface ISprites {
 	back_default: string;

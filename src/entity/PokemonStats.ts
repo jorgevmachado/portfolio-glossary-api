@@ -3,26 +3,26 @@ import { type IStat } from '../interfaces/pokemon/stat';
 @Entity('pokemons_stats')
 export class PokemonStats implements IStat {
 	@PrimaryGeneratedColumn('uuid')
-	id: string;
+	    id: string;
 
 	@Column()
-	url: string;
+	    url: string;
 
 	@Column()
-	name: string;
+	    name: string;
 
 	@Column()
-	effort: number;
+	    effort: number;
 
 	@Column()
-	base_stat: number;
+	    base_stat: number;
 
 	@CreateDateColumn()
-	created_at: Date;
+	    created_at: Date;
 
 	@UpdateDateColumn()
-	updated_at?: Date;
+	    updated_at?: Date;
 
 	@DeleteDateColumn()
-	deleted_at?: Date;
+	    deleted_at?: Date;
 }

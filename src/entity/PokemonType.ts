@@ -4,23 +4,23 @@ import { type IType } from '../interfaces/pokemon/type';
 @Entity('pokemons_types')
 export class PokemonTypes implements IType {
 	@PrimaryGeneratedColumn('uuid')
-	id: string;
+	    id: string;
 
 	@Column()
-	name: string;
+	    name: string;
 
 	@Column()
-	textColor: string;
+	    textColor: string;
 
 	@Column()
-	backgroundColor: string;
+	    backgroundColor: string;
 
 	@CreateDateColumn()
-	created_at: Date;
+	    created_at: Date;
 
 	@UpdateDateColumn()
-	updated_at?: Date;
+	    updated_at?: Date;
 
 	@DeleteDateColumn()
-	deleted_at?: Date;
+	    deleted_at?: Date;
 }

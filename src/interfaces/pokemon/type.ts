@@ -1,7 +1,6 @@
 import { type IBase } from '../base';
 import { type IPokemonBase } from './pokemon';
 
-
 export interface IResponseType {
 	slot: number;
 	type: IPokemonBase;
