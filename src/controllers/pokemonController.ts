@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { PokemonService } from '../services/pokemonService';
+import { PokemonService } from '@services/pokemonService';
 
 export default class PokemonController {
     async index(request: Request, response: Response): Promise<Response> {
@@ -14,6 +14,11 @@ export default class PokemonController {
             return response.json(data);
         }
         const data = await service.paginate(page, perPage, limit, offset);
+        if(!data) {
+            return response.status(404).json({
+                message: 'Not found',
+            });
+        }
         return response.json(data);
 
     }
@@ -22,6 +27,11 @@ export default class PokemonController {
         const { param } = request.params;
         const service = new PokemonService();
         const data = await service.show(param);
+        if(!data) {
+            return response.status(404).json({
+                message: 'Not found',
+            });
+        }
         return response.json(data);
     }
 
@@ -34,6 +44,11 @@ export default class PokemonController {
             limit,
             offset
         });
+        if (!data) {
+            return response.status(404).json({
+                message: 'Not found',
+            });
+        }
         return response.json(data);
     }
 

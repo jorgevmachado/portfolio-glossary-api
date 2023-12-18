@@ -1,4 +1,5 @@
 import { Router } from 'express';
+
 import pokemonRoutes from './pokemon.routes';
 
 const routes = Router();

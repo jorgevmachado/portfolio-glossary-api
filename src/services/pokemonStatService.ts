@@ -1,8 +1,8 @@
-import { PokemonStats } from '../entity/PokemonStats';
-import { type IResponseStat } from '../interfaces/pokemon/stat';
+import { type IResponseStat } from '@interfaces/pokemon/stat';
+import PokemonStatRepository from '@repositories/PokemonStatRepository';
+import PokemonStatMapper from '@mapper/pokemonStatMapper';
 
-import PokemonStatRepository from '../repositories/PokemonStatRepository';
-import PokemonStatMapper from '../mapper/pokemonStatMapper';
+import { PokemonStats } from '@entity/PokemonStats';
 
 export class PokemonStatService {
     async generatePokemonStat(responseStat: IResponseStat): Promise<PokemonStats | undefined> {

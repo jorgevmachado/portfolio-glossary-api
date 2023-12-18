@@ -1,8 +1,8 @@
-import { PokemonSpecies } from '../entity/PokemonSpecies';
-import { type IResponseSpecies, type ISpecie } from '../interfaces/pokemon/species';
+import { type IResponseSpecies, type ISpecie } from '@interfaces/pokemon/species';
+import PokemonSpecieRepository from '@repositories/PokemonSpecieRepository';
+import PokemonApi from '@api/pokemon.api';
 
-import PokemonSpecieRepository from '../repositories/PokemonSpecieRepository';
-import PokemonApi from '../api/pokemon.api';
+import { PokemonSpecies } from '@entity/PokemonSpecies';
 
 export class PokemonSpecieService {
 

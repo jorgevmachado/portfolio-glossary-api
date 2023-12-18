@@ -34,5 +34,22 @@ module.exports = {
         'indent': ['error', 4, { 'SwitchCase': 1 }],
         'semi': ['error', 'always'],
         'quotes': ['error', 'single'],
+        '@typescript-eslint/ban-ts-comment': 'off',
+        'import/no-anonymous-default-export': 'off',
+        '@typescript-eslint/no-unused-vars': ['warn'],
+        'import-helpers/order-imports': [
+            'warn',
+            {
+                newlinesBetween: 'always',
+                groups: [
+                    'module',
+                    '/ˆ@interfaces/',
+                    '/^@entity/',
+                    '/ˆ@mapper/',
+                    '/ˆ@repositories/',
+                    ['parent', 'sibling', 'index']
+                ]
+            }
+        ]
     }
 };

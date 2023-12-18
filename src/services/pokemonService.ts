@@ -1,16 +1,15 @@
-import { Pokemon } from '../entity/Pokemon';
-import { type IPokemonBase, type IResponsePokemon, type IResponsePokemonBase } from '../interfaces/pokemon/pokemon';
+import { type IPokemonBase, type IResponsePokemon, type IResponsePokemonBase } from '@interfaces/pokemon/pokemon';
+import { PokemonSpecieService } from '@services/pokemonSpecieService';
+import { PokemonStatService } from '@services/pokemonStatService';
+import { PokemonTypeService } from '@services/pokemonTypeService';
+import { PokemonAbilityService } from '@services/pokemonAbilityService';
+import { PokemonEvolutionService } from '@services/pokemonEvolutionService';
+import { PokemonMoveService } from '@services/pokemonMoveService';
+import PokemonApi from '@api/pokemon.api';
+import PokemonRepository from '@repositories/PokemonRepository';
+import PokemonMapper from '@mapper/pokemonMapper';
 
-import { PokemonSpecieService } from './pokemonSpecieService';
-import { PokemonStatService } from './pokemonStatService';
-import { PokemonTypeService } from './pokemonTypeService';
-import { PokemonAbilityService } from './pokemonAbilityService';
-import { PokemonEvolutionService } from './pokemonEvolutionService';
-
-import PokemonApi from '../api/pokemon.api';
-import PokemonRepository from '../repositories/PokemonRepository';
-import PokemonMoveService from './pokemonMoveService';
-import PokemonMapper from '../mapper/pokemonMapper';
+import { Pokemon } from '@entity/Pokemon';
 
 interface IGeneratePokemon {
 	isPaginate: boolean;

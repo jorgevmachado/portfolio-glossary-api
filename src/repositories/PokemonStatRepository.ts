@@ -1,8 +1,9 @@
-import { AppDataSource } from '../data-source';
-import { PokemonStats } from '../entity/PokemonStats';
-import { type IStat } from '../interfaces/pokemon/stat';
+import { type IStat } from '@interfaces/pokemon/stat';
+import PokemonStatMapper from '@mapper/pokemonStatMapper';
 
-import PokemonStatMapper from '../mapper/pokemonStatMapper';
+import { PokemonStats } from '@entity/PokemonStats';
+
+import { AppDataSource } from '../data-source';
 
 export default class PokemonStatRepository {
     constructor() {}

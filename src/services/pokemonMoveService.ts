@@ -1,10 +1,10 @@
-import { PokemonMove } from '../entity/PokemonMove';
-import { type IResponseMove } from '../interfaces/pokemon/move';
+import { type IResponseMove } from '@interfaces/pokemon/move';
+import PokemonMoveRepository from '@repositories/PokemonMoveRepository';
+import PokemonMoveMapper from '@mapper/pokemonMoveMapper';
 
-import PokemonMoveRepository from '../repositories/PokemonMoveRepository';
-import PokemonMoveMapper from '../mapper/pokemonMoveMapper';
+import { PokemonMove } from '@entity/PokemonMove';
 
-export default class PokemonMoveService {
+export class PokemonMoveService {
 
     async generatePokemonMove(response: IResponseMove): Promise<PokemonMove | undefined> {
         const repository = new PokemonMoveRepository();

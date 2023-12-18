@@ -20,6 +20,7 @@
       "eslint-plugin-standard": "^5.0.0",
       "nodemon": "^3.0.2",
       "ts-node": "^10.9.2",
+      "ts-node-dev": "^2.0.0",
       "tsconfig-paths": "^4.2.0",
       "typescript": "*"
    },
@@ -33,7 +34,7 @@
       "typeorm": "0.3.17"
    },
    "scripts": {
-      "start": "nodemon src/index.ts",
+      "start": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/index.ts",
       "typeorm": "typeorm-ts-node-commonjs",
       "lint": "eslint --ext .ts . --ignore-pattern '/dist'"
    },

@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-import { type ISpecie } from '../interfaces/pokemon/species';
+import { type ISpecie } from '@interfaces/pokemon/species';
 
 @Entity('pokemons_species')
 export class PokemonSpecies implements ISpecie {

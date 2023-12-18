@@ -1,7 +1,9 @@
+import { type IPokemon } from '@interfaces/pokemon/pokemon';
+import { type IPaginate } from '@interfaces/paginate';
+
+import { Pokemon } from '@entity/Pokemon';
+
 import { AppDataSource } from '../data-source';
-import { Pokemon } from '../entity/Pokemon';
-import { type IPokemon } from '../interfaces/pokemon/pokemon';
-import { type IPaginate } from '../interfaces/paginate';
 
 interface ICurrentProps {
 	page: number;
@@ -136,7 +138,11 @@ export default class PokemonRepository {
         if (pokemon) {
             return pokemon;
         }
-        return await this.findById(param);
+        const regex = new RegExp(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i);
+        if(regex.test(param)) {
+            return await this.findById(param);
+        }
+        return;
     }
 
     async findByOrder(order : number) {

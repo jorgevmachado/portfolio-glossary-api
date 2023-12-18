@@ -1,8 +1,8 @@
-import { PokemonAbility } from '../entity/PokemonAbility';
-import { type IResponseAbility } from '../interfaces/pokemon/ability';
+import { type IResponseAbility } from '@interfaces/pokemon/ability';
+import PokemonAbilityRepository from '@repositories/PokemonAbilityRepository';
+import PokemonAbilityMapper from '@mapper/pokemonAbilityMapper';
 
-import PokemonAbilityRepository from '../repositories/PokemonAbilityRepository';
-import PokemonAbilityMapper from '../mapper/pokemonAbilityMapper';
+import { PokemonAbility } from '@entity/PokemonAbility';
 
 export class PokemonAbilityService {
     async generatePokemonAbility(response: IResponseAbility) : Promise<PokemonAbility | undefined> {

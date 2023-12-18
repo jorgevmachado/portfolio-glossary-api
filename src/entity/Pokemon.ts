@@ -10,6 +10,7 @@ import {
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from 'typeorm';
+
 import { PokemonSpecies } from './PokemonSpecies';
 import { PokemonStats } from './PokemonStats';
 import { PokemonTypes } from './PokemonType';

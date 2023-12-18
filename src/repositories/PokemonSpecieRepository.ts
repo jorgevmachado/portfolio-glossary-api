@@ -1,6 +1,8 @@
+import { type ISpecie } from '@interfaces/pokemon/species';
+
+import { PokemonSpecies } from '@entity/PokemonSpecies';
+
 import { AppDataSource } from '../data-source';
-import { PokemonSpecies } from '../entity/PokemonSpecies';
-import { type ISpecie } from '../interfaces/pokemon/species';
 export default class PokemonSpecieRepository {
     constructor() {}
 

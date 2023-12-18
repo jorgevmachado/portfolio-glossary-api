@@ -1,8 +1,8 @@
-import { Pokemon } from '../entity/Pokemon';
-import { type IResponseEvolutions } from '../interfaces/pokemon/evolutions';
+import { type IResponseEvolutions } from '@interfaces/pokemon/evolutions';
+import PokemonApi from '@api/pokemon.api';
+import PokemonRepository from '@repositories/PokemonRepository';
 
-import PokemonApi from '../api/pokemon.api';
-import PokemonRepository from '../repositories/PokemonRepository';
+import { Pokemon } from '@entity/Pokemon';
 
 export class PokemonEvolutionService {
     async generatePokemonEvolution(evolution_chain_url: string): Promise<Array<Pokemon>> {
