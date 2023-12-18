@@ -1,1 +1,1 @@
-export * from './pokemonController'
+export * from './pokemonController';

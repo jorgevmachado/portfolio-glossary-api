@@ -9,7 +9,7 @@ export default class PokemonMoveMapper {
             url: response.move.url,
             name: response.move.name,
             created_at: new Date(),
-        }
+        };
     }
 
     static interfaceToEntity(item: IMove): PokemonMove {

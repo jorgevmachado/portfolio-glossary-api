@@ -26,6 +26,6 @@ export default class PokemonMapper {
             specie,
             created_at: new Date(),
 
-        }
+        };
     }
 }

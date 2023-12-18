@@ -22,7 +22,7 @@ export default class PokemonRepository {
     }
 
     public async initializeDatabase(pokemon: IPokemon) {
-        const old  = await this.findByOrder(pokemon.order)
+        const old  = await this.findByOrder(pokemon.order);
         if (!old) {
             const newPokemon = new Pokemon();
             newPokemon.name = pokemon.name;
@@ -41,7 +41,7 @@ export default class PokemonRepository {
             page: 0,
             next: null,
             prev: null,
-        }
+        };
         if (page === 0) {
             paginate.page = 1;
             paginate.next = 2;
@@ -92,7 +92,7 @@ export default class PokemonRepository {
             next: current.next,
             prev: current.prev,
             data: result,
-        }
+        };
     }
     public async index() {
         return await AppDataSource

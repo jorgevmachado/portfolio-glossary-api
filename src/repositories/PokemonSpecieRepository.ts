@@ -46,10 +46,10 @@ export default class PokemonSpecieRepository {
         pokemonSpecies.has_gender_differences= specie.has_gender_differences;
         pokemonSpecies.created_at = new Date();
 
-        const old = await this.findByOrder(pokemonSpecies.order)
+        const old = await this.findByOrder(pokemonSpecies.order);
         if(!old) {
             await this.save(pokemonSpecies);
-            const result = await this.findByOrder(pokemonSpecies.order)
+            const result = await this.findByOrder(pokemonSpecies.order);
             return !result ? undefined : result;
         }
         return old;

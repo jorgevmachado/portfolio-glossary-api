@@ -11,7 +11,7 @@ export default class PokemonAbilityMapper {
             slot: response.slot,
             is_hidden: response.is_hidden,
             created_at: new Date(),
-        }
+        };
     }
 
     static interfaceToEntity(item: IAbility): PokemonAbility {
