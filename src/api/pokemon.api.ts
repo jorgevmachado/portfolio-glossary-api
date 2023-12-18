@@ -4,7 +4,7 @@ import { IResponseSpecies } from '../interfaces/pokemon/species';
 export default class PokemonApi {
 	static urlDefault = 'https://pokeapi.co/api/v2';
 
-	static async getPokemons(limit: string, offset: string): Promise<IResponsePokemonBase> {
+	static async getPokemons(limit: number, offset: number): Promise<IResponsePokemonBase> {
 		return fetch(`${PokemonApi.urlDefault}/pokemon?offset=${offset}&limit=${limit}`, {}).then(async (response) => {
 			const status = response.status;
 			if (status !== 200) {

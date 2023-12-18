@@ -1,5 +1,5 @@
 import { Pokemon } from '../entity/Pokemon';
-import { IPokemon } from '../interfaces/pokemon/pokemon';
+import { IPokemon, IPokemonBase, IResponsePokemonBase } from '../interfaces/pokemon/pokemon';
 import PokemonStatMapper from './pokemonStatMapper';
 import { IStat } from '../interfaces/pokemon/stat';
 
@@ -15,5 +15,17 @@ export default class PokemonMapper {
 		entity.stats = stats;
 		entity.created_at = new Date();
 		return entity;
+	}
+
+	public static responseBaseToInterface(response: IResponsePokemonBase['results'][0], order: number, specie: IPokemon['specie']): IPokemon {
+		return {
+			id: '0',
+			url: response.url,
+			name: response.name,
+			order: order,
+			specie,
+			created_at: new Date(),
+
+		}
 	}
 }

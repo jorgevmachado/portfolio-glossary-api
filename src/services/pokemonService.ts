@@ -3,60 +3,86 @@ import { IPokemon, IPokemonBase, IResponsePokemon, IResponsePokemonBase } from '
 import { Pokemon } from '../entity/Pokemon';
 import PokemonApi from '../api/pokemon.api';
 import { PokemonSpecieService } from './pokemonSpecieService';
-import { ISpecie } from '../interfaces/pokemon/species';
 import { PokemonStatService } from './pokemonStatService';
-import { IResponseStat } from '../interfaces/pokemon/stat';
-import { PokemonStats } from '../entity/PokemonStats';
-import { IResponseType } from '../interfaces/pokemon/type';
 import { PokemonTypeService } from './pokemonTypeService';
-import { PokemonTypes } from '../entity/PokemonType';
 import { PokemonAbilityService } from './pokemonAbilityService';
-import { IResponseAbility } from '../interfaces/pokemon/ability';
-import { PokemonAbility } from '../entity/PokemonAbility';
 import { PokemonEvolutionService } from './pokemonEvolutionService';
-import { IResponseMove } from '../interfaces/pokemon/move';
 import PokemonMoveService from './pokemonMoveService';
-import { PokemonMove } from '../entity/PokemonMove';
+import PokemonMapper from '../mapper/pokemonMapper';
+import { IPaginate } from '../interfaces/paginate';
 
+
+interface IGeneratePokemon {
+	isPaginate: boolean;
+	limit: number;
+	offset: number;
+	currentPage?: number;
+	perPage?: number;
+}
 export class PokemonService {
-	async index() {
+
+	async index(limit: number = 1292, offset: number = 0) {
 		const repository = new PokemonRepository();
-		return repository.index();
+		const result = await repository.index();
+		if(result.length <= 0) {
+			return await this.generatePokemons({
+				isPaginate: false,
+				limit,
+				offset,
+			});
+		}
+		return result;
 	}
 
-	private generateOrder(url: string): number {
-		return Number(url
-			.replace('https://pokeapi.co/api/v2/pokemon/', '')
-			.replace('/', ''));
+	async paginate(currentPage: number = 0, perPage: number = 10, limit: number = 1292, offset: number = 0) {
+		const repository = new PokemonRepository();
+		const result = await repository.paginate(currentPage, perPage);
+		if (result.total <= 0) {
+			return await this.generatePokemons({
+				isPaginate: true,
+				limit,
+				offset,
+				currentPage,
+				perPage
+			});
+		}
+		return result;
 	}
-	private mapperResponseBaseToInterface(
-		response: IPokemonBase,
-		order: number,
-		specie: ISpecie,
-	): IPokemon {
-		return {
-			id: '0',
-			name: response.name,
-			url: response.url,
-			order: order,
-			specie,
-			created_at: new Date(),
-		};
-	}
-	async generatePokemons(limit: string, offset: string) {
+
+	async generatePokemons({
+		                       isPaginate = false,
+		                       limit = 1292,
+		                       offset = 0,
+		                       currentPage = 0,
+		                       perPage = 10
+	                       }: IGeneratePokemon) {
 		const list = await PokemonApi.getPokemons(limit, offset) as IResponsePokemonBase;
-		return await Promise.all(list.results.map(async (item: IPokemonBase) => {
-			const repository = new PokemonRepository();
+		const repository = new PokemonRepository();
+		const result = await Promise.all(list.results.map(async (item: IPokemonBase) => {
 			const speciesService = new PokemonSpecieService();
-			const statService = new PokemonStatService();
 			const order = this.generateOrder(item.url);
 			const specie = await speciesService.generateDefaultPokemonSpecie(order, item.name);
 			if(!specie) {
 				return;
 			}
-			const pokemon = this.mapperResponseBaseToInterface(item, order, specie);
+			const pokemon = PokemonMapper.responseBaseToInterface(item, order, specie);
 			return await repository.initializeDatabase(pokemon);
 		}));
+		if(!isPaginate){
+			return result;
+		}
+		const total = result.length;
+		const pages = Math.ceil(total / perPage);
+		const current = repository.current(currentPage, pages);
+		return {
+			total,
+			pages,
+			currentPage: current.page,
+			perPage,
+			next: current.next,
+			prev: current.prev,
+			data: result.filter(item => item !== undefined) as Array<Pokemon>
+		};
 	}
 
 	async show(param: string) {
@@ -66,6 +92,12 @@ export class PokemonService {
 			return;
 		}
 		return await this.generatePokemonByName(data);
+	}
+
+	private generateOrder(url: string): number {
+		return Number(url
+			.replace('https://pokeapi.co/api/v2/pokemon/', '')
+			.replace('/', ''));
 	}
 
 	private async generatePokemonByName(pokemon: Pokemon) {
