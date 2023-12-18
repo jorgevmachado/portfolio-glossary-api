@@ -1,6 +1,6 @@
-import { IResponseType, IType } from '../interfaces/pokemon/type';
-import { POKEMON_TYPE_COLORS } from '../controllers/pokemonUtils';
 import { PokemonTypes } from '../entity/PokemonType';
+import { type IResponseType, type IType } from '../interfaces/pokemon/type';
+import { POKEMON_TYPE_COLORS } from '../controllers/pokemonUtils';
 
 export default class PokemonTypeMapper {
 

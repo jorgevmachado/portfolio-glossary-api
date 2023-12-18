@@ -1,4 +1,4 @@
-import { IPokemonBase } from './pokemon';
+import { type IPokemonBase } from './pokemon';
 
 export interface IResponseEvolutions {
 	baby_trigger_item: any;

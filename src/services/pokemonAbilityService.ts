@@ -1,6 +1,7 @@
-import { IResponseAbility } from '../interfaces/pokemon/ability';
-import PokemonAbilityRepository from '../repositories/PokemonAbilityRepository';
 import { PokemonAbility } from '../entity/PokemonAbility';
+import { type IResponseAbility } from '../interfaces/pokemon/ability';
+
+import PokemonAbilityRepository from '../repositories/PokemonAbilityRepository';
 import PokemonAbilityMapper from '../mapper/pokemonAbilityMapper';
 
 export class PokemonAbilityService {

@@ -1,31 +1,38 @@
-import {IPokemonBase} from "./pokemon";
-import { IBase } from '../base';
+import { type IBase } from '../base';
+import { type IPokemonBase} from './pokemon';
+
 interface IFavorTextEntries {
 	flavor_text: string;
 	language: IPokemonBase;
 	version: IPokemonBase;
 }
+
 interface IGenera {
 	genus: string;
 	language: IPokemonBase;
 }
+
 interface INames {
 	language: IPokemonBase;
 	name: string;
 }
+
 interface IPalParkEncounters  {
 	area: IPokemonBase;
 	base_score: number;
 	rate: number;
 }
+
 interface IPokedexNumbers {
 	entry_number: number;
 	pokedex: IPokemonBase;
 }
+
 interface IVarieties {
 	is_default: boolean;
 	pokemon: IPokemonBase;
 }
+
 export interface IResponseSpecies {
 	id?: number;
 	url: string;

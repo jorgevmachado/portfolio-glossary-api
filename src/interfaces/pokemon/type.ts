@@ -1,5 +1,6 @@
-import { IPokemonBase } from './pokemon';
-import { IBase } from '../base';
+import { type IBase } from '../base';
+import { type IPokemonBase } from './pokemon';
+
 
 export interface IResponseType {
 	slot: number;

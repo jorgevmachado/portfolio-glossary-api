@@ -1,10 +1,10 @@
-import { ISpecie } from './species';
-import { IAbility, IResponseAbility } from './ability';
-import { IGameIndex, IResponseGameIndex } from './game-index';
-import { IMove, IResponseMove } from './move';
-import { IResponseStat, IStat } from './stat';
-import { IType } from './type';
-import { IBase } from '../base';
+import { type IBase } from '../base';
+import { type ISpecie } from './species';
+import { type IAbility, type IResponseAbility } from './ability';
+import { type IResponseGameIndex } from './game-index';
+import { type IMove, type IResponseMove } from './move';
+import { type IResponseStat, type IStat } from './stat';
+import { type IType } from './type';
 
 export interface IPokemonBase {
 	name: string;

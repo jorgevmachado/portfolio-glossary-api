@@ -1,7 +1,7 @@
-import { IPokemon } from '../interfaces/pokemon/pokemon';
 import { AppDataSource } from '../data-source';
 import { Pokemon } from '../entity/Pokemon';
-import { IPaginate } from '../interfaces/paginate';
+import { type IPokemon } from '../interfaces/pokemon/pokemon';
+import { type IPaginate } from '../interfaces/paginate';
 
 interface ICurrentProps {
 	page: number;

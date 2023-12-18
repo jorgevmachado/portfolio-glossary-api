@@ -1,8 +1,7 @@
-import { IStat } from '../interfaces/pokemon/stat';
 import { AppDataSource } from '../data-source';
 import { PokemonStats } from '../entity/PokemonStats';
-import { PokemonSpecies } from '../entity/PokemonSpecies';
-import { IPokemon } from '../interfaces/pokemon/pokemon';
+import { type IStat } from '../interfaces/pokemon/stat';
+
 import PokemonStatMapper from '../mapper/pokemonStatMapper';
 
 export default class PokemonStatRepository {

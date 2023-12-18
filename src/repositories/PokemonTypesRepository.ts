@@ -1,7 +1,8 @@
 import { AppDataSource } from '../data-source';
-import { IType } from '../interfaces/pokemon/type';
-import PokemonTypeMapper from '../mapper/pokemonTypeMapper';
 import { PokemonTypes } from '../entity/PokemonType';
+import { type IType } from '../interfaces/pokemon/type';
+
+import PokemonTypeMapper from '../mapper/pokemonTypeMapper';
 
 export default class PokemonTypesRepository {
 	constructor() {}

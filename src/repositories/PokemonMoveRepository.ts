@@ -1,6 +1,7 @@
-import { PokemonMove } from '../entity/PokemonMove';
 import { AppDataSource } from '../data-source';
-import { IMove } from '../interfaces/pokemon/move';
+import { PokemonMove } from '../entity/PokemonMove';
+import { type IMove } from '../interfaces/pokemon/move';
+
 import PokemonMoveMapper from '../mapper/pokemonMoveMapper';
 
 export default class PokemonMoveRepository {

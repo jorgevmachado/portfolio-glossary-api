@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-import { IAbility } from '../interfaces/pokemon/ability';
+import { type IAbility } from '../interfaces/pokemon/ability';
 
 @Entity('pokemons_ability')
 export class PokemonAbility implements IAbility {

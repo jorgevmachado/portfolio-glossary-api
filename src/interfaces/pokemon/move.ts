@@ -1,6 +1,6 @@
-import { IPokemonBase } from './pokemon';
-import { IResponseVersionGroupDetail, IVersionGroupDetail } from './version-group-detail';
-import { IBase } from '../base';
+import { type IBase } from '../base';
+import { type IPokemonBase } from './pokemon';
+import { type IResponseVersionGroupDetail } from './version-group-detail';
 
 export interface IResponseMove {
 	move: IPokemonBase;

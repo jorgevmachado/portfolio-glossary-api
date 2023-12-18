@@ -1,5 +1,6 @@
-import { IAbility, IResponseAbility } from '../interfaces/pokemon/ability';
 import { PokemonAbility } from '../entity/PokemonAbility';
+import { type IAbility, type IResponseAbility } from '../interfaces/pokemon/ability';
+
 
 export default class PokemonAbilityMapper {
 	static responseToInterface(response: IResponseAbility): IAbility {

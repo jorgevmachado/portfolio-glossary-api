@@ -1,6 +1,7 @@
-import { IAbility } from '../interfaces/pokemon/ability';
-import { PokemonAbility } from '../entity/PokemonAbility';
 import { AppDataSource } from '../data-source';
+import { PokemonAbility } from '../entity/PokemonAbility';
+import { type IAbility } from '../interfaces/pokemon/ability';
+
 import PokemonAbilityMapper from '../mapper/pokemonAbilityMapper';
 
 export default class PokemonAbilityRepository {

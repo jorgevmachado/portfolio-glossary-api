@@ -1,5 +1,6 @@
 import { PokemonTypes } from '../entity/PokemonType';
-import { IResponseType } from '../interfaces/pokemon/type';
+import { type IResponseType } from '../interfaces/pokemon/type';
+
 import PokemonTypesRepository from '../repositories/PokemonTypesRepository';
 import PokemonTypeMapper from '../mapper/pokemonTypeMapper';
 

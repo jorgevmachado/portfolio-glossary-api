@@ -1,5 +1,5 @@
-import { IMove, IResponseMove } from '../interfaces/pokemon/move';
 import { PokemonMove } from '../entity/PokemonMove';
+import { type IMove, type IResponseMove } from '../interfaces/pokemon/move';
 
 export default class PokemonMoveMapper {
 

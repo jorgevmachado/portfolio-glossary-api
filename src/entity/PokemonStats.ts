@@ -1,6 +1,5 @@
-import { IStat } from '../interfaces/pokemon/stat';
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-
+import { type IStat } from '../interfaces/pokemon/stat';
 @Entity('pokemons_stats')
 export class PokemonStats implements IStat {
 	@PrimaryGeneratedColumn('uuid')

@@ -1,5 +1,5 @@
-import { type IPokemonBase } from './pokemon';
 import { type IBase } from '../base';
+import { type IPokemonBase } from './pokemon';
 
 export interface IResponseGameIndex {
 	version: IPokemonBase;

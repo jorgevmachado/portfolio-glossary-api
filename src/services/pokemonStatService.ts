@@ -1,6 +1,7 @@
-import { IResponseStat } from '../interfaces/pokemon/stat';
-import PokemonStatRepository from '../repositories/PokemonStatRepository';
 import { PokemonStats } from '../entity/PokemonStats';
+import { type IResponseStat } from '../interfaces/pokemon/stat';
+
+import PokemonStatRepository from '../repositories/PokemonStatRepository';
 import PokemonStatMapper from '../mapper/pokemonStatMapper';
 
 export class PokemonStatService {
