@@ -1,14 +1,18 @@
-import { type IResponseAbility } from '@interfaces/pokemon/ability';
+import { IAbility, type IResponseAbility } from '@interfaces/pokemon/ability';
 import PokemonAbilityRepository from '@repositories/PokemonAbilityRepository';
 import PokemonAbilityMapper from '@mapper/pokemonAbilityMapper';
+import { BaseService } from '@services/baseService';
 
 import { PokemonAbility } from '@entity/PokemonAbility';
 
-export class PokemonAbilityService {
-    async generatePokemonAbility(response: IResponseAbility) : Promise<PokemonAbility | undefined> {
+export class PokemonAbilityService extends BaseService<PokemonAbility, IAbility> {
+    constructor() {
         const repository = new PokemonAbilityRepository();
+        super(repository);
+    }
+    async generatePokemonAbility(response: IResponseAbility) : Promise<PokemonAbility | undefined> {
         const  newAbility= PokemonAbilityMapper.responseToInterface(response);
-        return await repository.initializeDatabase(newAbility);
+        return await this.repository.initializeDatabase(newAbility);
     }
 
     async generatePokemonAbilities(responseAbilities: Array<IResponseAbility>) {

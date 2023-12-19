@@ -1,15 +1,20 @@
-import { type IResponseType } from '@interfaces/pokemon/type';
+import { type IResponseType, type IType } from '@interfaces/pokemon/type';
 import PokemonTypesRepository from '@repositories/PokemonTypesRepository';
 import PokemonTypeMapper from '@mapper/pokemonTypeMapper';
+import { BaseService } from '@services/baseService';
 
 import { PokemonTypes } from '@entity/PokemonType';
 
-export class PokemonTypeService {
+export class PokemonTypeService extends BaseService<PokemonTypes, IType>{
+
+    constructor() {
+        const repository = new PokemonTypesRepository();
+        super(repository);
+    }
 
     async generatePokemonType(response: IResponseType): Promise<PokemonTypes | undefined> {
-        const repository = new PokemonTypesRepository();
         const newType = PokemonTypeMapper.responseToInterface(response);
-        return await repository.initializeDatabase(newType);
+        return await this.repository.initializeDatabase(newType);
     }
 
     async generatePokemonTypes(responseTypes: Array<IResponseType>) {

@@ -1,14 +1,18 @@
-import { type IResponseStat } from '@interfaces/pokemon/stat';
+import { type IResponseStat, type IStat } from '@interfaces/pokemon/stat';
 import PokemonStatRepository from '@repositories/PokemonStatRepository';
 import PokemonStatMapper from '@mapper/pokemonStatMapper';
+import { BaseService } from '@services/baseService';
 
 import { PokemonStats } from '@entity/PokemonStats';
 
-export class PokemonStatService {
-    async generatePokemonStat(responseStat: IResponseStat): Promise<PokemonStats | undefined> {
+export class PokemonStatService extends BaseService<PokemonStats, IStat>{
+    constructor() {
         const repository = new PokemonStatRepository();
+        super(repository);
+    }
+    async generatePokemonStat(responseStat: IResponseStat): Promise<PokemonStats | undefined> {
         const newStat = PokemonStatMapper.responseToInterface(responseStat);
-        return await repository.initializeDatabase(newStat);
+        return await this.repository.initializeDatabase(newStat);
     }
 
     async generatePokemonStats(responseStats: Array<IResponseStat>): Promise<Array<PokemonStats>> {

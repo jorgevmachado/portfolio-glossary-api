@@ -9,18 +9,17 @@ export default class PokemonController {
         const limit =  Number(request.query.limit || '1292');
         const offset =  Number(request.query.offset || '0');
         const service = new PokemonService();
-        if(isPaginate === 'false') {
-            const data  = await service.index(limit, offset);
+        if(isPaginate === 'true') {
+            const data = await service.paginate(page, perPage, limit, offset);
+            if(!data) {
+                return response.status(404).json({
+                    message: 'Not found',
+                });
+            }
             return response.json(data);
         }
-        const data = await service.paginate(page, perPage, limit, offset);
-        if(!data) {
-            return response.status(404).json({
-                message: 'Not found',
-            });
-        }
+        const data  = await service.index(limit, offset);
         return response.json(data);
-
     }
 
     async show(request: Request, response: Response): Promise<Response> {

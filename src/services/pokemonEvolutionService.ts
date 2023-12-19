@@ -1,12 +1,18 @@
 import { type IResponseEvolutions } from '@interfaces/pokemon/evolutions';
+import { type IPokemon } from '@interfaces/pokemon/pokemon';
 import PokemonApi from '@api/pokemon.api';
 import PokemonRepository from '@repositories/PokemonRepository';
+import { BaseService } from '@services/baseService';
 
 import { Pokemon } from '@entity/Pokemon';
 
-export class PokemonEvolutionService {
+export class PokemonEvolutionService extends BaseService<Pokemon, IPokemon>{
+
+    constructor() {
+        const repository = new PokemonRepository();
+        super(repository);
+    }
     async generatePokemonEvolution(evolution_chain_url: string): Promise<Array<Pokemon>> {
-        const pokemonRepository = new PokemonRepository();
         const response = await PokemonApi.getPokemonByUrl(evolution_chain_url) as IResponseEvolutions | null;
         if (!response) {
             return [] as Array<Pokemon>;
@@ -23,7 +29,7 @@ export class PokemonEvolutionService {
 
         const list = await Promise.all(
             evolvesToList.map(async (name) => {
-                const pokemon = await pokemonRepository.findByName(name);
+                const pokemon = await this.repository.findByName(name);
                 return !pokemon ?  undefined : pokemon;
             })
         );

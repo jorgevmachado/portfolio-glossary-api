@@ -1,15 +1,19 @@
-import { type IResponseMove } from '@interfaces/pokemon/move';
+import { type IMove, type IResponseMove } from '@interfaces/pokemon/move';
 import PokemonMoveRepository from '@repositories/PokemonMoveRepository';
 import PokemonMoveMapper from '@mapper/pokemonMoveMapper';
+import { BaseService } from '@services/baseService';
 
 import { PokemonMove } from '@entity/PokemonMove';
 
-export class PokemonMoveService {
+export class PokemonMoveService extends BaseService<PokemonMove, IMove>{
 
-    async generatePokemonMove(response: IResponseMove): Promise<PokemonMove | undefined> {
+    constructor() {
         const repository = new PokemonMoveRepository();
+        super(repository);
+    }
+    async generatePokemonMove(response: IResponseMove): Promise<PokemonMove | undefined> {
         const newMove = PokemonMoveMapper.responseToInterface(response);
-        return await repository.initializeDatabase(newMove);
+        return await this.repository.initializeDatabase(newMove);
     }
 
     async generatePokemonMoves(responseMoves: Array<IResponseMove>): Promise<Array<PokemonMove>> {
