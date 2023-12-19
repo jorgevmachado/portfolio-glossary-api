@@ -1,5 +1,5 @@
 import { type IResponseType, type IType } from '@interfaces/pokemon/type';
-import { POKEMON_TYPE_COLORS } from '@controllers/pokemonUtils';
+import { POKEMON_TYPE_COLORS } from '@utilities/pokemonUtils';
 
 import { PokemonTypes } from '@entity/PokemonType';
 

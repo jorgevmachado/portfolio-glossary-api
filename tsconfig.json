@@ -36,6 +36,9 @@
          ],
          "@shared/*": [
             "src/shared/*"
+         ],
+         "@utilities/*": [
+            "src/utilities/*"
          ]
       },
       "typeRoots": [
