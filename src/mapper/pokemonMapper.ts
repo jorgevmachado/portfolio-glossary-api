@@ -1,6 +1,8 @@
-import { Pokemon } from '../entity/Pokemon';
-import { type IPokemon, type IResponsePokemonBase } from '../interfaces/pokemon/pokemon';
-import { type IStat } from '../interfaces/pokemon/stat';
+import { type IPokemon, type IResponsePokemonBase } from '@interfaces/pokemon/pokemon';
+import { type IStat } from '@interfaces/pokemon/stat';
+
+import { Pokemon } from '@entity/Pokemon';
+
 import PokemonStatMapper from './pokemonStatMapper';
 
 export default class PokemonMapper {

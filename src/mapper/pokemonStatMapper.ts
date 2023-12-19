@@ -1,5 +1,6 @@
-import { PokemonStats } from '../entity/PokemonStats';
-import { type IResponseStat, type IStat } from '../interfaces/pokemon/stat';
+import { type IResponseStat, type IStat } from '@interfaces/pokemon/stat';
+
+import { PokemonStats } from '@entity/PokemonStats';
 
 export default class PokemonStatMapper {
     public static interfaceToEntity(item: IStat): PokemonStats {
