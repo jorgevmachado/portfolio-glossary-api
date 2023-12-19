@@ -1,23 +1,15 @@
 import { type IStat } from '@interfaces/pokemon/stat';
 import PokemonStatMapper from '@mapper/pokemonStatMapper';
+import { BaseRepository } from '@repositories/baseRepository';
 
 import { PokemonStats } from '@entity/PokemonStats';
 
 import { AppDataSource } from '../data-source';
 
-export default class PokemonStatRepository {
-    constructor() {}
-
-    public async save(stat: PokemonStats) {
-        return await AppDataSource.manager.save(stat);
-    }
-
-    public async findById(id: string) {
-        return await AppDataSource.manager.findOneBy(PokemonStats, { id });
-    }
-
-    public async findByName(name: string) {
-        return await AppDataSource.manager.findOneBy(PokemonStats, { name });
+export default class PokemonStatRepository extends BaseRepository<PokemonStats, IStat>{
+    constructor() {
+        const repository = AppDataSource.manager.getRepository(PokemonStats);
+        super(repository, 'pokemons_stats');
     }
 
     async initializeDatabase(stat: IStat): Promise<PokemonStats | undefined> {

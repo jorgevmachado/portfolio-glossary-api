@@ -1,19 +1,15 @@
 import { type IType } from '@interfaces/pokemon/type';
 import PokemonTypeMapper from '@mapper/pokemonTypeMapper';
+import { BaseRepository } from '@repositories/baseRepository';
 
 import { PokemonTypes } from '@entity/PokemonType';
 
 import { AppDataSource } from '../data-source';
 
-export default class PokemonTypesRepository {
-    constructor() {}
-
-    public async save(type: PokemonTypes) {
-        return await AppDataSource.manager.save(type);
-    }
-
-    public async findByName(name: string) {
-        return await AppDataSource.manager.findOneBy(PokemonTypes, { name });
+export default class PokemonTypesRepository extends BaseRepository<PokemonTypes, IType>{
+    constructor() {
+        const repository = AppDataSource.manager.getRepository(PokemonTypes);
+        super(repository, 'pokemons_types');
     }
 
     async initializeDatabase(newType: IType): Promise<PokemonTypes | undefined> {

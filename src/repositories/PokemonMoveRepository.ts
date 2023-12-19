@@ -1,19 +1,15 @@
 import { type IMove } from '@interfaces/pokemon/move';
 import PokemonMoveMapper from '@mapper/pokemonMoveMapper';
+import { BaseRepository } from '@repositories/baseRepository';
 
 import { PokemonMove } from '@entity/PokemonMove';
 
 import { AppDataSource } from '../data-source';
 
-export default class PokemonMoveRepository {
-    constructor() {}
-
-    public async save(entity: PokemonMove) {
-        return await AppDataSource.manager.save(entity);
-    }
-
-    public async findByName(name: string) {
-        return await AppDataSource.manager.findOneBy(PokemonMove, { name });
+export default class PokemonMoveRepository extends BaseRepository<PokemonMove, IMove>{
+    constructor() {
+        const repository = AppDataSource.manager.getRepository(PokemonMove);
+        super(repository, 'pokemons_moves');
     }
 
     public async initializeDatabase(newMove: IMove): Promise<PokemonMove | undefined> {

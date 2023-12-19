@@ -1,29 +1,29 @@
 import { type IPokemon } from '@interfaces/pokemon/pokemon';
 import { type IPaginate } from '@interfaces/paginate';
+import { BaseRepository } from '@repositories/baseRepository';
 
 import { Pokemon } from '@entity/Pokemon';
 
 import { AppDataSource } from '../data-source';
 
-interface ICurrentProps {
-	page: number;
-	next: number | null;
-	prev: number | null;
-}
-export default class PokemonRepository {
+export default class PokemonRepository extends BaseRepository<Pokemon, IPokemon>{
 
     public relations = ['specie', 'stats', 'types', 'abilities', 'evolutions', 'moves'];
-    constructor() {}
+    constructor() {
+        const repository = AppDataSource.manager.getRepository(Pokemon);
+        super(repository, 'pokemon');
+    }
 
-    public async create(pokemon: Pokemon) {
+    async create(pokemon: Pokemon): Promise<Pokemon | undefined> {
         await this.save(pokemon);
-        return this.findByNameOrId(pokemon.name);
-    }
-    public async save(pokemon: Pokemon) {
-        return await AppDataSource.manager.save(pokemon);
+        const data = await this.findByOrder(pokemon.order);
+        if(!data) {
+            return;
+        }
+        return data;
     }
 
-    public async initializeDatabase(pokemon: IPokemon) {
+    public async initializeDatabase(pokemon: IPokemon): Promise<Pokemon | undefined> {
         const old  = await this.findByOrder(pokemon.order);
         if (!old) {
             const newPokemon = new Pokemon();
@@ -38,44 +38,9 @@ export default class PokemonRepository {
         return old;
     }
 
-    current(page: number, pages: number): ICurrentProps {
-        const paginate: ICurrentProps = {
-            page: 0,
-            next: null,
-            prev: null,
-        };
-        if (page === 0) {
-            paginate.page = 1;
-            paginate.next = 2;
-            paginate.prev = null;
-            return paginate;
-        }
-        if(page >= pages) {
-            paginate.page = pages;
-            paginate.next = null;
-            paginate.prev = pages - 1;
-            return paginate;
-        }
-        paginate.page = page;
-        paginate.next = page + 1;
-        paginate.prev = page - 1;
-        return paginate;
-    }
-
-    paginateSkip(currentPage: number, perPage: number): number {
-        if(currentPage === 1) {
-            return 0;
-        }
-        if(currentPage === 2) {
-            return perPage;
-        }
-        return (currentPage * perPage) - perPage;
-    }
     async paginate(currentPage: number = 0, perPage: number = 10): Promise<IPaginate<Pokemon>> {
         const total = await this.total();
-        const pages = Math.ceil(total / perPage);
-        const current = this.current(currentPage, pages);
-        const skip = this.paginateSkip(current.page, perPage);
+        const initialize = this.initializePaginate(currentPage, perPage, total);
         const data = await AppDataSource
             .manager
             .getRepository(Pokemon)
@@ -87,20 +52,21 @@ export default class PokemonRepository {
             .leftJoinAndSelect('pokemon.evolutions', 'evolutions')
             .leftJoinAndSelect('pokemon.moves', 'moves')
             .orderBy('pokemon.order', 'ASC')
-            .skip(skip)
-            .take(perPage)
+            .skip(initialize.skip)
+            .take(initialize.perPage)
             .getMany();
         const result = data.filter((item) => item !== undefined) as Array<Pokemon>;
         return {
             total,
-            pages,
-            currentPage: current.page,
-            perPage,
-            next: current.next,
-            prev: current.prev,
+            pages: initialize.pages,
+            currentPage: initialize.currentPage,
+            perPage: initialize.perPage,
+            next: initialize.next,
+            prev: initialize.prev,
             data: result,
         };
     }
+
     public async index() {
         return await AppDataSource
             .manager.find(Pokemon, {
@@ -111,52 +77,54 @@ export default class PokemonRepository {
             });
     }
 
-    public async total() {
-        return await AppDataSource
-            .manager
-            .getRepository(Pokemon)
-            .count();
-    }
-
-    async findById(id: string) {
-        return await AppDataSource.manager.findOne(
-            Pokemon,
-            {
-                where: { id },
-                relations: this.relations,
-            }
-        );
-    }
-
-    findByName(name: string) {
-        return AppDataSource.manager.findOne(
-            Pokemon,
-            {
-                where: { name },
-                relations: this.relations,
-            }
-        );
-    }
-
-    async findByNameOrId(param: string) {
-        const pokemon = await this.findByName(param);
-        if (pokemon) {
-            return pokemon;
-        }
-        const regex = new RegExp(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i);
-        if(regex.test(param)) {
-            return await this.findById(param);
-        }
-        return;
-    }
-
-    async findByOrder(order : number) {
-        const pokemon = await AppDataSource.manager
-            .getRepository(Pokemon)
-            .findOne({ where: { order: order } });
-        if(!pokemon) {
+    async findById(id: string): Promise<Pokemon | undefined> {
+        const data = await this.repository
+            .createQueryBuilder(this.nameQuery)
+            .leftJoinAndSelect(`${this.nameQuery}.specie`, 'specie')
+            .leftJoinAndSelect(`${this.nameQuery}.stats`, 'stats')
+            .leftJoinAndSelect(`${this.nameQuery}.types`, 'types')
+            .leftJoinAndSelect(`${this.nameQuery}.abilities`, 'abilities')
+            .leftJoinAndSelect(`${this.nameQuery}.evolutions`, 'evolutions')
+            .leftJoinAndSelect(`${this.nameQuery}.moves`, 'moves')
+            .andWhere(`${this.nameQuery}.id = :id`, { id })
+            .getOne();
+        if(!data){
             return;
         }
-        return pokemon;
+        return data;
+    }
+
+    async findByName(name: string): Promise<Pokemon | undefined> {
+        const data = await this.repository
+            .createQueryBuilder(this.nameQuery)
+            .leftJoinAndSelect(`${this.nameQuery}.specie`, 'specie')
+            .leftJoinAndSelect(`${this.nameQuery}.stats`, 'stats')
+            .leftJoinAndSelect(`${this.nameQuery}.types`, 'types')
+            .leftJoinAndSelect(`${this.nameQuery}.abilities`, 'abilities')
+            .leftJoinAndSelect(`${this.nameQuery}.evolutions`, 'evolutions')
+            .leftJoinAndSelect(`${this.nameQuery}.moves`, 'moves')
+            .andWhere(`${this.nameQuery}.name = :name`, { name })
+            .getOne();
+        if (!data) {
+            return;
+        }
+        return data;
+    }
+
+    async findByOrder(order: number): Promise<Pokemon | undefined> {
+        const data = await this.repository
+            .createQueryBuilder(this.nameQuery)
+            .leftJoinAndSelect(`${this.nameQuery}.specie`, 'specie')
+            .leftJoinAndSelect(`${this.nameQuery}.stats`, 'stats')
+            .leftJoinAndSelect(`${this.nameQuery}.types`, 'types')
+            .leftJoinAndSelect(`${this.nameQuery}.abilities`, 'abilities')
+            .leftJoinAndSelect(`${this.nameQuery}.evolutions`, 'evolutions')
+            .leftJoinAndSelect(`${this.nameQuery}.moves`, 'moves')
+            .andWhere(`${this.nameQuery}.order = :order`, { order })
+            .getOne();
+        if (!data) {
+            return;
+        }
+        return data;
     }
 }

@@ -1,21 +1,17 @@
 import { type ISpecie } from '@interfaces/pokemon/species';
+import { BaseRepository } from '@repositories/baseRepository';
 
 import { PokemonSpecies } from '@entity/PokemonSpecies';
 
 import { AppDataSource } from '../data-source';
-export default class PokemonSpecieRepository {
-    constructor() {}
+export default class PokemonSpecieRepository extends BaseRepository<PokemonSpecies, ISpecie>{
+    constructor() {
+        const repository = AppDataSource.manager.getRepository(PokemonSpecies);
+        super(repository, 'pokemons_species');
+    }
 
     public async save(specie: PokemonSpecies) {
         return await AppDataSource.manager.save(specie);
-    }
-
-    async findById(id: string) {
-        return await AppDataSource.manager.findOneBy(PokemonSpecies, { id });
-    }
-
-    async findByOrder(order: number) {
-        return await AppDataSource.manager.findOneBy(PokemonSpecies, { order });
     }
 
     public async initializeDatabase(specie: ISpecie): Promise<PokemonSpecies | undefined> {
