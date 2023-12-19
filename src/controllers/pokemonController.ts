@@ -1,7 +1,13 @@
 import { Request, Response } from 'express';
 import { PokemonService } from '@services/pokemonService';
+import { BaseController } from '@controllers/baseController';
 
-export default class PokemonController {
+import { Pokemon } from '@entity/Pokemon';
+
+export default class PokemonController extends BaseController<Pokemon> {
+    constructor() {
+        super();
+    }
     async index(request: Request, response: Response): Promise<Response> {
         const page = Number(request.query.page || '0');
         const perPage = Number(request.query.perPage || '10');
@@ -11,27 +17,17 @@ export default class PokemonController {
         const service = new PokemonService();
         if(isPaginate === 'true') {
             const data = await service.paginate(page, perPage, limit, offset);
-            if(!data) {
-                return response.status(404).json({
-                    message: 'Not found',
-                });
-            }
-            return response.json(data);
+            return this.responseResult(data, response);
         }
         const data  = await service.index(limit, offset);
-        return response.json(data);
+        return this.responseResult(data, response);
     }
 
     async show(request: Request, response: Response): Promise<Response> {
         const { param } = request.params;
         const service = new PokemonService();
         const data = await service.show(param);
-        if(!data) {
-            return response.status(404).json({
-                message: 'Not found',
-            });
-        }
-        return response.json(data);
+        return this.responseResult(data, response);
     }
 
     async generate(request: Request, response: Response): Promise<Response> {
@@ -43,12 +39,7 @@ export default class PokemonController {
             limit,
             offset
         });
-        if (!data) {
-            return response.status(404).json({
-                message: 'Not found',
-            });
-        }
-        return response.json(data);
+        return this.responseResult(data, response);
     }
 
 
