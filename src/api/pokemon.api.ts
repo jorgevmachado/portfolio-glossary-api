@@ -1,5 +1,5 @@
-import { IResponsePokemon, IResponsePokemonBase } from '../interfaces/pokemon/pokemon';
-import { IResponseSpecies } from '../interfaces/pokemon/species';
+import { type IResponsePokemon, type IResponsePokemonBase } from '@interfaces/pokemon/pokemon';
+import { type IResponseSpecies } from '@interfaces/pokemon/species';
 
 export default class PokemonApi {
     static urlDefault = 'https://pokeapi.co/api/v2';

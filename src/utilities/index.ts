@@ -1,4 +1,4 @@
-export class StringUtils {
+export default class StringUtils {
     public static capitalize(str: string): string {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
@@ -20,6 +20,17 @@ export class StringUtils {
             .NumberFormat(locale, { style: 'currency', currency })
             .format(amount)
             .replace(String.fromCharCode(160), String.fromCharCode(32));
+    }
+
+    public static generateOrder(url: string, urlDefault: string): number {
+        return Number(url
+            .replace(urlDefault, '')
+            .replace('/', ''));
+    }
+
+    public static generateListOrder(urls: Array<string>, urlDefault: string): Array<number> | undefined {
+        const list = urls.map((url) => StringUtils.generateOrder(url, urlDefault));
+        return !list.length ? undefined : list;
     }
 
 }

@@ -1,12 +1,18 @@
 import { Request, Response } from 'express';
-import { PokemonService } from '@services/pokemonService';
-import { BaseController } from '@controllers/baseController';
+import { PokemonService } from '@services/pokemon/pokemonService';
+import { IPaginate } from '@interfaces/paginate';
 
 import { Pokemon } from '@entity/Pokemon';
 
-export default class PokemonController extends BaseController<Pokemon> {
-    constructor() {
-        super();
+export default class PokemonController {
+
+    static responseResult(data: Array<Pokemon> | Pokemon | IPaginate<Pokemon> | undefined, response: Response): Response {
+        if(!data) {
+            return response.status(404).json({
+                message: 'Not found',
+            });
+        }
+        return response.json(data);
     }
     async index(request: Request, response: Response): Promise<Response> {
         const page = Number(request.query.page || '0');
@@ -17,17 +23,17 @@ export default class PokemonController extends BaseController<Pokemon> {
         const service = new PokemonService();
         if(isPaginate === 'true') {
             const data = await service.paginate(page, perPage, limit, offset);
-            return this.responseResult(data, response);
+            return PokemonController.responseResult(data, response);
         }
         const data  = await service.index(limit, offset);
-        return this.responseResult(data, response);
+        return PokemonController.responseResult(data, response);
     }
 
     async show(request: Request, response: Response): Promise<Response> {
         const { param } = request.params;
         const service = new PokemonService();
         const data = await service.show(param);
-        return this.responseResult(data, response);
+        return PokemonController.responseResult(data, response);
     }
 
     async generate(request: Request, response: Response): Promise<Response> {
@@ -39,7 +45,7 @@ export default class PokemonController extends BaseController<Pokemon> {
             limit,
             offset
         });
-        return this.responseResult(data, response);
+        return PokemonController.responseResult(data, response);
     }
 
 

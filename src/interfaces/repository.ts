@@ -19,5 +19,6 @@ export interface IRepository<T, I> {
 	findByName(name: string): Promise<T | undefined>;
 	findByNameOrId(param: string): Promise<T | undefined>;
 	findByOrder(order: number): Promise<T | undefined>;
+	findByUrl(url: string): Promise<T | undefined>;
 	isUUID(id: string): boolean;
 }

@@ -13,6 +13,18 @@
          "@controllers/*": [
             "src/controllers/*"
          ],
+         "@base/*": [
+            "src/base/*"
+         ],
+         "@http/*": [
+            "src/http"
+         ],
+         "@starWars/*": [
+            "src/starWars/*"
+         ],
+         "@pokemon/*": [
+            "src/pokemon/*"
+         ],
          "@mapper/*": [
             "src/mapper/*"
          ],
