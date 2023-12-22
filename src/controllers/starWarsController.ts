@@ -96,4 +96,15 @@ export default class StarWarsController {
         }
         return response.json(data);
     }
+
+    async characters(request: Request, response: Response): Promise<Response> {
+        const service = new PersonService();
+        const data = await service.index();
+        return response.json(data);
+    }
+    async films(request: Request, response: Response): Promise<Response> {
+        const service = new FilmService();
+        const data = await service.index();
+        return response.json(data);
+    }
 }
