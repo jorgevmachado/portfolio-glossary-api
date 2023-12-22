@@ -1,5 +1,6 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-import { type IType } from '@interfaces/pokemon/type';
+import { IType } from '@pokemon/type';
+
 
 @Entity('pokemons_types')
 export class PokemonTypes implements IType {
@@ -7,7 +8,13 @@ export class PokemonTypes implements IType {
 	    id: string;
 
 	@Column()
+	    url: string;
+
+	@Column()
 	    name: string;
+
+	@Column()
+	    order: number;
 
 	@Column()
 	    textColor: string;

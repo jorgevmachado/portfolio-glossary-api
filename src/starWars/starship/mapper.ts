@@ -1,6 +1,6 @@
 import { type IStarship } from '@starWars/starship/interfaces';
 import { type IResponseStarship } from '@api/starWars';
-import StringUtils from '@utilities/index';
+import { generateOrder } from '@services/string';
 
 import { StarWarsStarship } from '@entity/StarWarsStarship';
 
@@ -34,7 +34,7 @@ export default class StarshipMapper {
         const iEntity = StarshipMapper.defaultInterface();
         iEntity.url =  response.url;
         iEntity.crew =  response.crew;
-	    iEntity.order = StringUtils.generateOrder(response.url, StarshipMapper.urlDefault);
+	    iEntity.order = generateOrder(response.url, StarshipMapper.urlDefault);
         iEntity.MGLT =  response.MGLT;
         iEntity.name =  response.name;
         iEntity.model =  response.model;

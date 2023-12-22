@@ -1,8 +1,9 @@
 import { type ISpecie } from '@starWars/species/interfaces';
 import { type IResponseSpecie } from '@api/starWars';
-import StringUtils from '@utilities/index';
+import { generateOrder } from '@services/string';
 
 import { StarWarsSpecies } from '@entity/starWarsSpecies';
+
 export default class SpecieMapper {
     static urlDefault = 'https://swapi.dev/api/species/';
 
@@ -28,7 +29,7 @@ export default class SpecieMapper {
         const iEntity = SpecieMapper.defaultInterface();
         iEntity.url = response.url;
         iEntity.name = response.name;
-        iEntity.order = StringUtils.generateOrder(response.url, SpecieMapper.urlDefault);
+        iEntity.order = generateOrder(response.url, SpecieMapper.urlDefault);
         iEntity.language = response.language;
         iEntity.eye_colors =  response.eye_colors;
         iEntity.designation = response.designation;

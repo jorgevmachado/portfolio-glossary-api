@@ -1,6 +1,6 @@
 import { type IResponseVehicle } from '@api/starWars';
 import { type IVehicle } from '@starWars/vehicle/interfaces';
-import StringUtils from '@utilities/index';
+import { generateOrder } from '@services/string';
 
 import { StarWarsVehicle } from '@entity/StarWarsVehicle';
 
@@ -33,7 +33,7 @@ export default class VehicleMapper {
 	    iEntity.crew = response.crew;
 	    iEntity.name = response.name;
 	    iEntity.model = response.model;
-	    iEntity.order = StringUtils.generateOrder(response.url, VehicleMapper.urlDefault);
+	    iEntity.order = generateOrder(response.url, VehicleMapper.urlDefault);
 	    iEntity.length = response.length;
 	    iEntity.passengers = response.passengers;
 	    iEntity.consumables = response.consumables;

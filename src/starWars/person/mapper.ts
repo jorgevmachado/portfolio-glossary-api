@@ -1,6 +1,6 @@
-import StringUtils from '@utilities/index';
 import { type IPerson } from '@starWars/person/interfaces';
 import { type IResponsePerson } from '@api/starWars';
+import { generateOrder } from '@services/string';
 
 import { StarWarsSpecies } from '@entity/starWarsSpecies';
 import { StarWarsPlanet } from '@entity/StarWarsPlanet';
@@ -48,7 +48,7 @@ export default class PersonMapper {
         iEntity.url = response.url;
         iEntity.mass = response.mass;
         iEntity.name = response.name;
-        iEntity.order = StringUtils.generateOrder(response.url, PersonMapper.urlDefault);
+        iEntity.order = generateOrder(response.url, PersonMapper.urlDefault);
         iEntity.gender = response.gender;
         iEntity.height = response.height;
         iEntity.species = species;

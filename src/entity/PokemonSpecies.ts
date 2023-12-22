@@ -72,11 +72,11 @@ export class PokemonSpecies implements ISpecie {
 	@Column()
 	    evolution_chain_url: string;
 
-	@Column()
-	    evolves_from_species_url: string;
+	@Column({nullable: true})
+	    evolves_from_species_url?: string;
 
-	@Column()
-	    evolves_from_species_name: string;
+	@Column({nullable: true})
+	    evolves_from_species_name?: string;
 
 	@Column()
 	    has_gender_differences: boolean;

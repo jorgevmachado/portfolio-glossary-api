@@ -5,7 +5,7 @@ const pokemonRoutes = Router();
 const controller = new PokemonController();
 
 pokemonRoutes.get('/', controller.index);
-pokemonRoutes.get('/generate', controller.generate);
+pokemonRoutes.get('/generate-base', controller.generateBase);
 pokemonRoutes.get('/:param', controller.show);
 
 export default pokemonRoutes;

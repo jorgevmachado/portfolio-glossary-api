@@ -10,6 +10,9 @@ import {
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from 'typeorm';
+import { type IPokemon } from '@pokemon/pokemon';
+
+import { PokemonForm } from '@entity/PokemonForm';
 
 import { PokemonSpecies } from './PokemonSpecies';
 import { PokemonStats } from './PokemonStats';
@@ -18,7 +21,7 @@ import { PokemonAbility } from './PokemonAbility';
 import { PokemonMove } from './PokemonMove';
 
 @Entity('pokemons')
-export class Pokemon {
+export class Pokemon implements IPokemon{
 	@PrimaryGeneratedColumn('uuid')
 	    id: string;
 
@@ -28,41 +31,16 @@ export class Pokemon {
 	@Column()
 	    url: string;
 
+	@OneToOne(
+	    () => PokemonForm,
+	    { nullable: true }
+	)
+	@JoinColumn()
+	    form: PokemonForm;
+
+
 	@Column()
 	    name: string;
-
-	@Column({
-	    nullable: true
-	})
-	    image?: string;
-
-	@Column({
-	    nullable: true
-	})
-	    weight?: number;
-
-	@Column({
-	    nullable: true
-	})
-	    height?: number;
-
-	@Column({
-	    nullable: true
-	})
-	    base_experience?: number;
-
-	@CreateDateColumn()
-	    created_at: Date;
-
-	@UpdateDateColumn()
-	    updated_at?: Date;
-
-	@DeleteDateColumn()
-	    deleted_at?: Date;
-
-	@OneToOne( () => PokemonSpecies)
-	@JoinColumn()
-	    specie: PokemonSpecies;
 
 	@ManyToMany(
 	    () => PokemonStats,
@@ -71,12 +49,38 @@ export class Pokemon {
 	@JoinTable()
 	    stats: Array<PokemonStats>;
 
+	@Column()
+	    image: string;
+
+	@ManyToMany(
+	    () => PokemonMove,
+	    { nullable: true }
+	)
+	@JoinTable()
+	    moves: Array<PokemonMove>;
+
 	@ManyToMany(
 	    () => PokemonTypes,
 	    { nullable: true }
 	)
 	@JoinTable()
 	    types: Array<PokemonTypes>;
+
+	@Column()
+	    weight: number;
+
+	@Column()
+	    height: number;
+
+	@OneToOne(
+	    () => PokemonSpecies,
+	    { nullable: true }
+	)
+	@JoinColumn()
+	    specie: PokemonSpecies;
+
+	@Column()
+	    complete: boolean;
 
 	@ManyToMany(
 	    () => PokemonAbility,
@@ -92,10 +96,15 @@ export class Pokemon {
 	@JoinTable()
 	    evolutions: Array<Pokemon>;
 
-	@ManyToMany(
-	    () => PokemonMove,
-	    { nullable: true }
-	)
-	@JoinTable()
-	    moves: Array<PokemonMove>;
+	@Column()
+	    base_experience: number;
+
+	@CreateDateColumn()
+	    created_at: Date;
+
+	@UpdateDateColumn()
+	    updated_at?: Date;
+
+	@DeleteDateColumn()
+	    deleted_at?: Date;
 }

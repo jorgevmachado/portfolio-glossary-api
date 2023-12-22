@@ -3,11 +3,11 @@ import PersonRepository from '@starWars/person/repository';
 import { BaseService } from '@base/baseService';
 import PersonMapper from '@starWars/person/mapper';
 import { type IResponsePerson, type IResponseStarWarsPaginate, StarWars } from '@api/starWars';
-import StringUtils from '@utilities/index';
 import PlanetMapper from '@starWars/planet/mapper';
 import SpecieMapper from '@starWars/species/mapper';
 import StarshipMapper from '@starWars/starship/mapper';
 import VehicleMapper from '@starWars/vehicle/mapper';
+import { generateListOrder, generateOrder } from '@services/string';
 
 import { StarWarsPlanet } from '@entity/StarWarsPlanet';
 import { StarWarsStarship } from '@entity/StarWarsStarship';
@@ -76,12 +76,12 @@ export class PersonService extends BaseService<StarWarsPerson, IPerson> {
     }
 
     private filterHomeworld(homeworld: string, planets: Array<StarWarsPlanet>): StarWarsPlanet {
-        const order = StringUtils.generateOrder(homeworld, PlanetMapper.urlDefault);
+        const order = generateOrder(homeworld, PlanetMapper.urlDefault);
         return planets.find((planet) => planet.order === order) as StarWarsPlanet;
     }
 
     private filterSpeciesList(species: Array<string>, speciesList: Array<StarWarsSpecies>): Array<StarWarsSpecies> {
-        const orders = StringUtils.generateListOrder(species, SpecieMapper.urlDefault);
+        const orders = generateListOrder(species, SpecieMapper.urlDefault);
         if(!orders) {
             return [];
         }
@@ -89,7 +89,7 @@ export class PersonService extends BaseService<StarWarsPerson, IPerson> {
     }
 
     private filterStarshipsList(starships: Array<string>, starshipsList: Array<StarWarsStarship>): Array<StarWarsStarship> {
-        const orders = StringUtils.generateListOrder(starships, StarshipMapper.urlDefault);
+        const orders = generateListOrder(starships, StarshipMapper.urlDefault);
         if(!orders) {
             return [];
         }
@@ -97,7 +97,7 @@ export class PersonService extends BaseService<StarWarsPerson, IPerson> {
     }
 
     private filterVehiclesList(vehicles: Array<string>, vehiclesList: Array<StarWarsVehicle>): Array<StarWarsVehicle> {
-        const orders = StringUtils.generateListOrder(vehicles, VehicleMapper.urlDefault);
+        const orders = generateListOrder(vehicles, VehicleMapper.urlDefault);
         if(!orders) {
             return [];
         }

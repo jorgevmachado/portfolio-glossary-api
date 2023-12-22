@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-import { type IAbility } from '@interfaces/pokemon/ability';
+import { IAbility } from '@pokemon/ability';
 
 @Entity('pokemons_ability')
 export class PokemonAbility implements IAbility {
@@ -8,7 +8,7 @@ export class PokemonAbility implements IAbility {
 	    id: string;
 
 	@Column()
-	    is_hidden: boolean;
+	    url: string;
 
 	@Column()
 	    name: string;
@@ -17,7 +17,10 @@ export class PokemonAbility implements IAbility {
 	    slot: number;
 
 	@Column()
-	    url: string;
+	    is_hidden: boolean;
+
+	@Column()
+	    order: number;
 
 	@CreateDateColumn()
 	    created_at: Date;

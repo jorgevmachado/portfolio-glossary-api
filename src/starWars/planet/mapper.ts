@@ -1,6 +1,6 @@
 import { IResponsePlanet } from '@api/starWars';
 import { IPlanet } from '@starWars/planet/interfaces';
-import StringUtils from '@utilities/index';
+import { generateOrder } from '@services/string';
 
 import { StarWarsPlanet } from '@entity/StarWarsPlanet';
 
@@ -28,7 +28,7 @@ export default class PlanetMapper {
         const iEntity = PlanetMapper.defaultInterface();
         iEntity.url = response.url;
         iEntity.name = response.name;
-        iEntity.order = StringUtils.generateOrder(response.url, PlanetMapper.urlDefault);
+        iEntity.order = generateOrder(response.url, PlanetMapper.urlDefault);
         iEntity.climate = response.climate;
         iEntity.gravity = response.gravity;
         iEntity.diameter = response.diameter;

@@ -81,14 +81,17 @@ export class BaseRepository<T extends ObjectLiteral, I> implements IRepository<T
     }
 
     async findById(id: string): Promise<T | undefined> {
-        const data = await this.repository
-            .createQueryBuilder(this.nameQuery)
-            .andWhere(`${this.nameQuery}.id = :id`, { id })
-            .getOne();
-        if(!data){
-            return;
-        }
-        return data;
+	    if(this.isUUID(id)) {
+		    const data = await this.repository
+			    .createQueryBuilder(this.nameQuery)
+			    .andWhere(`${this.nameQuery}.id = :id`, { id })
+			    .getOne();
+		    if(!data){
+			    return;
+		    }
+		    return data;
+	    }
+        return;
     }
 
     async findByName(name: string): Promise<T | undefined> {
@@ -107,10 +110,7 @@ export class BaseRepository<T extends ObjectLiteral, I> implements IRepository<T
         if(entity) {
             return entity;
         }
-	    if(this.isUUID(param)) {
-		    return await this.findById(param);
-	    }
-	    return;
+	    return await this.findById(param);
     }
 
     async findByOrder(order: number): Promise<T | undefined> {

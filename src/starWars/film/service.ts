@@ -3,12 +3,12 @@ import { BaseService } from '@base/baseService';
 import FilmRepository from '@starWars/film/repository';
 import { StarWars } from '@api/starWars';
 import FilmMapper from '@starWars/film/mapper';
-import StringUtils from '@utilities/index';
 import PlanetMapper from '@starWars/planet/mapper';
 import SpecieMapper from '@starWars/species/mapper';
 import StarshipMapper from '@starWars/starship/mapper';
 import VehicleMapper from '@starWars/vehicle/mapper';
 import PersonMapper from '@starWars/person/mapper';
+import { generateListOrder } from '@services/string';
 
 import { StarWarsPerson } from '@entity/StarWarsPerson';
 import { StarWarsVehicle } from '@entity/StarWarsVehicle';
@@ -78,7 +78,7 @@ export class FilmService extends BaseService<StarWarsFilms, IFilm> {
     }
 
     private filterPlanetList(planets: Array<string>, planetList: Array<StarWarsPlanet>): Array<StarWarsPlanet> {
-        const order = StringUtils.generateListOrder(planets, PlanetMapper.urlDefault);
+        const order = generateListOrder(planets, PlanetMapper.urlDefault);
         if(!order) {
             return [];
         }
@@ -86,7 +86,7 @@ export class FilmService extends BaseService<StarWarsFilms, IFilm> {
     }
 
     private filterSpeciesList(species: Array<string>, speciesList: Array<StarWarsSpecies>): Array<StarWarsSpecies> {
-        const orders = StringUtils.generateListOrder(species, SpecieMapper.urlDefault);
+        const orders = generateListOrder(species, SpecieMapper.urlDefault);
         if(!orders) {
             return [];
         }
@@ -94,7 +94,7 @@ export class FilmService extends BaseService<StarWarsFilms, IFilm> {
     }
 
     private filterStarshipsList(starships: Array<string>, starshipsList: Array<StarWarsStarship>): Array<StarWarsStarship> {
-        const orders = StringUtils.generateListOrder(starships, StarshipMapper.urlDefault);
+        const orders = generateListOrder(starships, StarshipMapper.urlDefault);
         if(!orders) {
             return [];
         }
@@ -102,7 +102,7 @@ export class FilmService extends BaseService<StarWarsFilms, IFilm> {
     }
 
     private filterVehiclesList(vehicles: Array<string>, vehiclesList: Array<StarWarsVehicle>): Array<StarWarsVehicle> {
-        const orders = StringUtils.generateListOrder(vehicles, VehicleMapper.urlDefault);
+        const orders = generateListOrder(vehicles, VehicleMapper.urlDefault);
         if(!orders) {
             return [];
         }
@@ -110,7 +110,7 @@ export class FilmService extends BaseService<StarWarsFilms, IFilm> {
     }
 
     private filterCharacterList(character: Array<string>, characterList: Array<StarWarsPerson>): Array<StarWarsPerson> {
-        const orders = StringUtils.generateListOrder(character, PersonMapper.urlDefault);
+        const orders = generateListOrder(character, PersonMapper.urlDefault);
         if(!orders) {
             return [];
         }

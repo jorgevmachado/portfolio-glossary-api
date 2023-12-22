@@ -7,7 +7,7 @@ import { BaseRepository } from './baseRepository';
 export class BaseService<T extends ObjectLiteral, I> implements IService<T> {
 
     constructor(protected repository: BaseRepository<T, I>) {}
-    async index(limit: number, offset: number): Promise<Array<T>> {
+    async index(limit?: number, offset?: number): Promise<Array<T>> {
         return await this.repository.index();
     }
 

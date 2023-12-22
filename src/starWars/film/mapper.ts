@@ -1,6 +1,6 @@
 import { type IFilm } from '@starWars/film/interfaces';
 import { type IResponseFilm } from '@api/starWars';
-import StringUtils from '@utilities/index';
+import { generateOrder } from '@services/string';
 
 import { StarWarsFilms } from '@entity/StarWarsFilms';
 import { StarWarsSpecies } from '@entity/starWarsSpecies';
@@ -47,7 +47,7 @@ export default class FilmMapper {
     static responseToInterface({ response, planets = [], species = [], starships = [], vehicles = [], characters = []}: IResponseToEntity): IFilm {
         const iEntity = FilmMapper.defaultInterface();
 	    iEntity.url = response.url;
-	    iEntity.order = StringUtils.generateOrder(response.url, FilmMapper.urlDefault);
+	    iEntity.order = generateOrder(response.url, FilmMapper.urlDefault);
         iEntity.title = response.title;
         iEntity.species = species;
         iEntity.planets = planets;
