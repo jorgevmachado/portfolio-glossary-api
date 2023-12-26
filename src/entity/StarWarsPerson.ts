@@ -32,6 +32,9 @@ export class StarWarsPerson implements IPerson{
 	    name: string;
 
 	@Column()
+	    image: string;
+
+	@Column()
 	    order: number;
 
 	@Column()

@@ -1,5 +1,6 @@
 import { type IResponsePerson } from '@api/starWars';
 import { generateOrder } from '@services/string';
+import { STAR_WARS_IMAGES } from '@business/starWars/person/config';
 
 import { StarWarsNationality } from '@entity/starWarsNationality';
 import { StarWarsPlanet } from '@entity/StarWarsPlanet';
@@ -29,6 +30,7 @@ export default class PersonMapper {
             url: '',
             mass: '',
             name:  '',
+	        image: '',
             order: 0,
             gender: '',
             height: '',
@@ -46,9 +48,11 @@ export default class PersonMapper {
 
     static responseToInterface({response, species = [], vehicles = [], homeworld, starships = []}: IResponseToEntity): IPerson {
         const iEntity = PersonMapper.defaultInterface();
+        const image = STAR_WARS_IMAGES.find(item => item.name === response.name);
         iEntity.url = response.url;
         iEntity.mass = response.mass;
         iEntity.name = response.name;
+        iEntity.image = !image ? 'star-wars-logo.webp' : image.image;
         iEntity.order = generateOrder(response.url, PersonMapper.urlDefault);
         iEntity.gender = response.gender;
         iEntity.height = response.height;
@@ -68,6 +72,7 @@ export default class PersonMapper {
 	    entity.url = iEntity.url;
 	    entity.mass = iEntity.mass;
 	    entity.name = iEntity.name;
+        entity.image = iEntity.image;
 	    entity.order = iEntity.order;
 	    entity.gender = iEntity.gender;
 	    entity.height = iEntity.height;

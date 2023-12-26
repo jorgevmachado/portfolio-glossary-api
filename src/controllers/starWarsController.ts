@@ -4,7 +4,6 @@ import { PersonService } from '@business/starWars/person';
 import { StarWarsService } from '@business/starWars/starWars';
 
 export default class StarWarsController {
-
     async generate(request: Request, response: Response): Promise<Response> {
         const service = new StarWarsService();
         const  data = await service.generate();
@@ -21,4 +20,12 @@ export default class StarWarsController {
         const data = await service.index();
         return response.json(data);
     }
+
+    async showCharacter(request: Request, response: Response): Promise<Response> {
+        const { name } = request.params;
+        const service = new PersonService();
+        const data = await service.show(name);
+        return response.json(data);
+    }
+
 }

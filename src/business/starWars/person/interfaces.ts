@@ -9,6 +9,7 @@ export interface IPerson extends IBase {
 	url: string;
 	mass: string;
 	name: string;
+	image: string;
 	order: number;
 	gender: string;
 	height: string;

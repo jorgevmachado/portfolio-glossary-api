@@ -9,6 +9,7 @@ export interface ICurrentProps {
 export interface IRepository<T, I> {
 	create(entity: T): Promise<T | undefined>;
 	save(entity: T): void;
+	transformReceiveData(entity: T): T;
 	initializeDatabases(listInterface: Array<I>): Promise<Array<T | undefined> | undefined>;
 	initializeDatabase(iEntity: I): Promise<T | undefined>;
 	initializePaginate(currentPage: number, perPage: number, total: number): IInitializePaginate;
@@ -28,12 +29,20 @@ export interface IRepository<T, I> {
 export class BaseRepository<T extends ObjectLiteral, I> implements IRepository<T, I> {
 
     constructor(protected repository: Repository<T>, protected nameQuery: string ) {}
+
+    transformReceiveData(entity: T): T {
+        return entity;
+    }
     async save(entity: T) {
         return await this.repository.save(entity);
     }
     async create(entity: T): Promise<T | undefined> {
         await this.save(entity);
-        return await this.findById(entity.id);
+        const data = await this.findById(entity.id);
+        if(!data) {
+            return;
+        }
+        return this.transformReceiveData(data);
     }
 
     async initializeDatabase(iEntity: I): Promise<T | undefined> {
@@ -112,7 +121,7 @@ export class BaseRepository<T extends ObjectLiteral, I> implements IRepository<T
 		    if(!data){
 			    return;
 		    }
-		    return data;
+		    return this.transformReceiveData(data);
 	    }
         return;
     }
@@ -125,7 +134,7 @@ export class BaseRepository<T extends ObjectLiteral, I> implements IRepository<T
         if (!data) {
             return;
         }
-        return data;
+        return this.transformReceiveData(data);
     }
 
     async findByNameOrId(param: string): Promise<T | undefined> {
@@ -144,7 +153,7 @@ export class BaseRepository<T extends ObjectLiteral, I> implements IRepository<T
         if (!data) {
             return;
         }
-        return data;
+        return this.transformReceiveData(data);
     }
 
     async findByUrl(url: string): Promise<T | undefined> {
@@ -155,7 +164,7 @@ export class BaseRepository<T extends ObjectLiteral, I> implements IRepository<T
         if (!data) {
             return;
         }
-        return data;
+	    return this.transformReceiveData(data);
     }
 
     async index(): Promise<T[]> {
@@ -163,7 +172,7 @@ export class BaseRepository<T extends ObjectLiteral, I> implements IRepository<T
         if(!data) {
             return [];
         }
-        return data;
+        return data.map((item) => this.transformReceiveData(item));
     }
 
     async total(): Promise<number> {

@@ -24,7 +24,7 @@ export default class TypeMapper {
 
     static responseToInterface(response: IResponsePokemon['types'][0]): IType {
         const iEntity = TypeMapper.defaultInterface();
-        const typeColor = POKEMON_TYPE_COLORS.find(type => type.name === response.type.name);
+        const typeColor = POKEMON_TYPE_COLORS.find(item => item.name === response.type.name);
 	    iEntity.url = response.type.url;
         iEntity.name = response.type.name;
         iEntity.order = generateOrder(response.type.url, TypeMapper.urlDefault);

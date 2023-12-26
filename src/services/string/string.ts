@@ -31,3 +31,7 @@ export function generateListOrder(urls: Array<string>, urlDefault: string): Arra
     const list = urls.map((url) => generateOrder(url, urlDefault));
     return !list.length ? undefined : list;
 }
+
+export function fileImageUrl(host: string = 'http://localhost', port: string = '3000', path: string = ''): string {
+    return `${host}:${port}/files/images/${path}`;
+}

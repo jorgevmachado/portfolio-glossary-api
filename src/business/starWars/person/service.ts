@@ -66,6 +66,10 @@ export class PersonService extends BaseService<StarWarsPerson, IPerson> {
         return data;
     }
 
+    async show(query: string): Promise<StarWarsPerson | undefined> {
+        return await this.repository.findByName(query);
+    }
+
     private async generateByPage(page: number): Promise<IResponseStarWarsPaginate<IResponsePerson> | undefined> {
         const responses = new StarWars();
         const response = await responses.getPeoples(page);
