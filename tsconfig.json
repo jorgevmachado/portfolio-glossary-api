@@ -10,48 +10,24 @@
       "rootDir": "src",
       "baseUrl": "./",
       "paths": {
+         "@entity/*": [
+            "src/entity/*"
+         ],
          "@controllers/*": [
             "src/controllers/*"
          ],
          "@base/*": [
             "src/base/*"
          ],
-         "@http/*": [
-            "src/http"
-         ],
-         "@starWars/*": [
-            "src/starWars/*"
-         ],
-         "@pokemon/*": [
-            "src/pokemon/*"
-         ],
-         "@mapper/*": [
-            "src/mapper/*"
+         "@services/*": [
+            "src/services"
          ],
          "@api/*": [
             "src/api/*"
          ],
-         "@entity/*": [
-            "src/entity/*"
+         "@business/*": [
+            "src/business/*"
          ],
-         "@interfaces/*": [
-            "src/interfaces/*"
-         ],
-         "@repositories/*": [
-            "src/repositories/*"
-         ],
-         "@routes/*": [
-            "src/routes/*"
-         ],
-         "@services/*": [
-            "src/services/*"
-         ],
-         "@shared/*": [
-            "src/shared/*"
-         ],
-         "@utilities/*": [
-            "src/utilities/*"
-         ]
       },
       "typeRoots": [
          "@types",

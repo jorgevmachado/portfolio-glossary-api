@@ -1,7 +1,7 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-import { IAbility } from '@pokemon/ability';
+import { type IAbility } from '@business/pokemon';
 
-@Entity('pokemons_ability')
+@Entity('pokemons_abilities')
 export class PokemonAbility implements IAbility {
 
 	@PrimaryGeneratedColumn('uuid')

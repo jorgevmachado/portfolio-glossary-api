@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { PokemonService } from '@pokemon/pokemon';
+import { PokemonService } from '@business/pokemon';
 
 export default class PokemonController {
 
@@ -7,7 +7,7 @@ export default class PokemonController {
         const service = new PokemonService();
         const pokemonBase = await service.generate();
         return response.json({
-            pokemonBase:  !pokemonBase ? 'Não foi possivel gerar a lista de pokemons base' : 'Lista de Pokemons Base gerada com sucesso',
+            pokemonBase:  !pokemonBase ? 'Unable to generate base pokemon list!' : 'List of Base Pokemons successfully generated!',
         });
     }
 

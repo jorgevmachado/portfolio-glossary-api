@@ -10,13 +10,13 @@ import {
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from 'typeorm';
-import { type IPokemon } from '@pokemon/pokemon';
+import { type IPokemon } from '@business/pokemon/pokemon';
 
 import { PokemonForm } from '@entity/PokemonForm';
 
-import { PokemonSpecies } from './PokemonSpecies';
-import { PokemonStats } from './PokemonStats';
-import { PokemonTypes } from './PokemonType';
+import { PokemonSpecie } from './PokemonSpecie';
+import { PokemonStat } from './PokemonStat';
+import { PokemonType } from './PokemonType';
 import { PokemonAbility } from './PokemonAbility';
 import { PokemonMove } from './PokemonMove';
 
@@ -43,11 +43,11 @@ export class Pokemon implements IPokemon{
 	    name: string;
 
 	@ManyToMany(
-	    () => PokemonStats,
+	    () => PokemonStat,
 	    { nullable: true }
 	)
 	@JoinTable()
-	    stats: Array<PokemonStats>;
+	    stats: Array<PokemonStat>;
 
 	@Column()
 	    image: string;
@@ -60,11 +60,11 @@ export class Pokemon implements IPokemon{
 	    moves: Array<PokemonMove>;
 
 	@ManyToMany(
-	    () => PokemonTypes,
+	    () => PokemonType,
 	    { nullable: true }
 	)
 	@JoinTable()
-	    types: Array<PokemonTypes>;
+	    types: Array<PokemonType>;
 
 	@Column()
 	    weight: number;
@@ -73,11 +73,11 @@ export class Pokemon implements IPokemon{
 	    height: number;
 
 	@OneToOne(
-	    () => PokemonSpecies,
+	    () => PokemonSpecie,
 	    { nullable: true }
 	)
 	@JoinColumn()
-	    specie: PokemonSpecies;
+	    specie: PokemonSpecie;
 
 	@Column()
 	    complete: boolean;

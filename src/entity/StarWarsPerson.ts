@@ -10,11 +10,11 @@ import {
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from 'typeorm';
-import { type IPerson } from '@starWars/person';
+import { type IPerson } from '@business/starWars';
 
 import { StarWarsVehicle } from '@entity/StarWarsVehicle';
 import { StarWarsPlanet } from '@entity/StarWarsPlanet';
-import { StarWarsSpecies } from '@entity/starWarsSpecies';
+import { StarWarsNationality } from '@entity/starWarsNationality';
 import { StarWarsStarship } from '@entity/StarWarsStarship';
 
 @Entity('star_wars_people')
@@ -41,9 +41,9 @@ export class StarWarsPerson implements IPerson{
 	    height: string;
 
 
-	@ManyToMany(() => StarWarsSpecies)
+	@ManyToMany(() => StarWarsNationality)
 	@JoinTable()
-	    species: Array<StarWarsSpecies>;
+	    nationalities: Array<StarWarsNationality>;
 
 	@ManyToMany(() => StarWarsVehicle)
 	@JoinTable()

@@ -1,0 +1,1 @@
+export { StarWarsService } from './service';

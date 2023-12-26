@@ -1,6 +1,5 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-import { type IVehicle } from '@starWars/vehicle';
-
+import { type IVehicle } from '@business/starWars';
 
 @Entity('star_wars_vehicles')
 export class StarWarsVehicle implements IVehicle {

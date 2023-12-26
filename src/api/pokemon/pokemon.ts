@@ -1,5 +1,5 @@
 import * as dto from '@api/pokemon/interfaces';
-import { Http } from '@http/http';
+import { Http } from 'src/services/http';
 
 export class Pokemon extends Http {
     constructor() {

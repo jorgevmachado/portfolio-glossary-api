@@ -44,10 +44,12 @@ module.exports = {
                 newlinesBetween: 'always',
                 groups: [
                     'module',
-                    '/ˆ@interfaces/',
+                    '/ˆ@api/',
+                    '/ˆ@base/',
                     '/^@entity/',
-                    '/ˆ@mapper/',
                     '/ˆ@repositories/',
+                    '/ˆ@services/',
+                    '/ˆ@controllers/',
                     ['parent', 'sibling', 'index']
                 ]
             }

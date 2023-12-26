@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-import { type IForm } from '@pokemon/form';
+import { type IForm } from '@business/pokemon';
 
 @Entity('pokemons_forms')
 export class PokemonForm implements IForm {

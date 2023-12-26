@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-import { IMove } from '@pokemon/move';
+import { type IMove } from '@business/pokemon';
 
 @Entity('pokemons_moves')
 export class PokemonMove implements IMove {

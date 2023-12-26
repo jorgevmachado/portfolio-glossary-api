@@ -1,5 +1,5 @@
 import * as dto from '@api/starWars/interfaces';
-import { Http } from '@http/http';
+import { Http } from 'src/services/http';
 
 export class StarWars extends Http {
     constructor() {

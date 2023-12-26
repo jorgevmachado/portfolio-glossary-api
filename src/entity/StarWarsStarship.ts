@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-import { type IStarship } from '@starWars/starship';
+import { type IStarship } from '@business/starWars';
 
 @Entity('star_wars_starships')
 export class StarWarsStarship implements IStarship {

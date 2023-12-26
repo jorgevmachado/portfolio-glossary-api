@@ -1,9 +1,7 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-import { IType } from '@pokemon/type';
-
-
+import { type IType } from '@business/pokemon';
 @Entity('pokemons_types')
-export class PokemonTypes implements IType {
+export class PokemonType implements IType {
 	@PrimaryGeneratedColumn('uuid')
 	    id: string;
 

@@ -7,10 +7,9 @@ import {
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from 'typeorm';
-import { type IPlanet } from '@starWars/planet';
+import { type IPlanet } from '@business/starWars';
 
 import { StarWarsPerson } from '@entity/StarWarsPerson';
-
 
 @Entity('star_wars_planets')
 export class StarWarsPlanet implements IPlanet {
