@@ -5,10 +5,8 @@ export default class PokemonController {
 
     async generateBase(request: Request, response: Response): Promise<Response> {
         const service = new PokemonService();
-        const pokemonBase = await service.generate();
-        return response.json({
-            pokemonBase:  !pokemonBase ? 'Unable to generate base pokemon list!' : 'List of Base Pokemons successfully generated!',
-        });
+        const data = await service.generate();
+        return response.json(data);
     }
 
     async show(request: Request, response: Response): Promise<Response> {

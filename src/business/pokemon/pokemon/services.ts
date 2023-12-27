@@ -1,6 +1,7 @@
 import { IResponsePokemon, Pokemon as Api } from '@api/pokemon';
 import { BaseService } from '@base/service';
 import { IPokemon } from '@business/pokemon';
+import { IResponseMessage } from '@base/interface/interface';
 
 import { Pokemon } from '@entity/Pokemon';
 
@@ -21,26 +22,26 @@ export class PokemonService extends BaseService<Pokemon, IPokemon> {
         super(repository);
     }
 
-    async generate(): Promise<Array<Pokemon> | undefined> {
+    async generate(): Promise<IResponseMessage> {
         const result = await this.index();
         if(result.length) {
-            return result;
+            return { message: 'Base Pokemons already generated!'};
         }
         const responses = new Api();
         const response = await responses.getPokemonsBase(1302, 0);
         if(!response) {
-            return;
+            return { message: 'Error When Querying External Api Please Try Again Later!'};
         }
 	    const listInterface = response.results.map((item) => PokemonMapper.baseResponseToInterface(item));
 	    const listEntities = await this.repository.initializeDatabases(listInterface);
 	    if(!listEntities) {
-		    return;
+		    return { message: 'Unable to generate base pokemon list!'};
 	    }
 	    const filterListEntities: Array<Pokemon> = listEntities.filter((item) => item !== undefined) as Array<Pokemon>;
 	    if(!filterListEntities) {
-		    return [];
+            return { message: 'Unable to generate base pokemon list!'};
 	    }
-        return filterListEntities;
+        return { message: 'List of Base Pokemons successfully generated!'};
     }
 
     async index(): Promise<Array<Pokemon>> {

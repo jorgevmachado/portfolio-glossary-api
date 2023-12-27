@@ -20,6 +20,7 @@ export interface IRepository<T, I> {
 	total(): Promise<number>;
 	findById(id: string): Promise<T | undefined>;
 	findByName(name: string): Promise<T | undefined>;
+	findByEmail(email: string): Promise<T | undefined>;
 	findByNameOrId(param: string): Promise<T | undefined>;
 	findByOrder(order: number): Promise<T | undefined>;
 	findByUrl(url: string): Promise<T | undefined>;
@@ -34,7 +35,11 @@ export class BaseRepository<T extends ObjectLiteral, I> implements IRepository<T
         return entity;
     }
     async save(entity: T) {
-        return await this.repository.save(entity);
+        const data = await this.repository.save(entity);
+        if (!data) {
+            throw new Error('Error to save entity');
+        }
+        return this.transformReceiveData(data);
     }
     async create(entity: T): Promise<T | undefined> {
         await this.save(entity);
@@ -160,6 +165,17 @@ export class BaseRepository<T extends ObjectLiteral, I> implements IRepository<T
         const data = await this.repository
             .createQueryBuilder(this.nameQuery)
             .andWhere(`${this.nameQuery}.url = :url`, { url })
+            .getOne();
+        if (!data) {
+            return;
+        }
+	    return this.transformReceiveData(data);
+    }
+
+    async findByEmail(email: string): Promise<T | undefined> {
+        const data = await this.repository
+            .createQueryBuilder(this.nameQuery)
+            .andWhere(`${this.nameQuery}.email = :email`, { email })
             .getOne();
         if (!data) {
             return;
